@@ -32,8 +32,8 @@ Shoot, use it with recursive promises, too.
 
 ```ts twoslash
 const getName = Promise
-	.resolve("Roger" as const)
-	.then(name => `Hello, ${name}` as const);
+  .resolve("Roger" as const)
+  .then(name => Promise.resolve(`Hello, ${name}` as const));
 
 type PromValue = Awaited<typeof getName>;
 //   ^?
@@ -47,6 +47,7 @@ Ditch some keys from a type to "broaden" a type.
 
 ```ts twoslash
 type Person = { name: string; age: number; height: number; }
+
 type AgelessPerson = Omit<Person, 'age'>;
 //   ^?
 ```
@@ -67,7 +68,8 @@ type NameOnlyPerson = Omit<Person, 'age' | 'height'>;
 Kind of like `Omit`, but we select specific keys to *keep* (instead of to discard).
 
 ```ts twoslash
-type Person = { name: string; age: number; height: number; }
+type Person = { name: string; age: number; height: number; };
+
 type NameOnlyPerson = Pick<Person, 'name'>;
 //   ^?
 
@@ -100,9 +102,13 @@ type Person = NonNullable<ApiResponse>;
 Get the type of the return value of a function type. Very useful for deriving types from functions you already have sitting around.
 
 ```ts twoslash
-import { useState } from "react";
+const makePerson = (name: string, age: number) => ({
+  name,
+  age,
+  isAlive: true,
+});
 
-type UseStateReturn = ReturnType<typeof useState>;
+type Person = ReturnType<typeof makePerson>
 //   ^?
 ```
 
@@ -110,28 +116,85 @@ type UseStateReturn = ReturnType<typeof useState>;
 
 # The `Parameters` type
 
-TODO
+Get the parameter types for a function type. Like `ReturnType`, very useful for deriving types from functions you already have sitting around.
+
+```ts twoslash
+const makePerson = (name: string, age: number) => ({
+  name,
+  age,
+  isAlive: true,
+});
+
+type MakePersonParams = Parameters<typeof makePerson>
+//   ^?
+
+type Age = MakePersonParams[0];
+//   ^?
+```
 
 ---
 
 # The `Partial` type
 
-TODO
+Make all properties on a type optional. Useful if you want to make a derived type where you can pass any of the properties on the original type.
+
+```ts twoslash
+// @errors: 2741
+type Person = { name: string; age: number; };
+type PartialPerson = Partial<Person>;
+//   ^?
+
+// Missing a field
+const person: Person = { name: "Roger" };
+
+// With `PartialPerson`, can specify a subset of fields
+const partOfPerson: PartialPerson = { name: "Roger" };
+```
 
 ---
 
 # The `Required` type
 
-TODO
+Like `Partial`, but sets all properties to *required* instead of optional. Useful for enforcing that all properties are set.
+
+
+```ts twoslash
+type PartialPerson = { name?: string; age?: number };
+
+type Person = Required<PartialPerson>;
+//   ^?
+```
 
 ---
 
 # The `Exclude` type
 
-TODO
+Given a union of types, the `Exclude` utility allows you to exclude or omit some of those types from the union.
+
+```ts twoslash
+type Person = "Grant" | "Carlos" | "Trey";
+
+type PartyPerson = Exclude<Person, "Grant">;
+//   ^?
+
+// Omit multiple using union type
+type OofPerson = Exclude<Person, "Carlos" | "Trey">;
+//   ^?
+```
 
 ---
 
 # The `Extract` type
 
-TODO
+Like the `Exclude` type, but where you want to *select* or *include* a subset of types from a type union.
+
+```ts twoslash
+type Person = "Grant" | "Carlos" | "Trey";
+
+type OofPerson = Extract<Person, "Grant">;
+//   ^?
+
+// Omit multiple using union type
+type PartyPerson = Extract<Person, "Carlos" | "Trey">;
+//   ^?
+```
