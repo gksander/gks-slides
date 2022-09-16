@@ -21,9 +21,26 @@ html {
   }
 }
 
+/* Add some style to inline code elements */
 code:not(pre code) {
   font-family: 'JetBrains Mono', monospace;
   @apply bg-gray-100 bg-opacity-10 px-2 rounded;
+}
+
+:root {
+	--num-slides: 0;
+}
+
+/* Add some slide numbers */
+main.slide-wrapper {
+	counter-reset: slide-count;
+}
+section.slide {
+	counter-increment: slide-count;
+}
+
+div.page-count {
+	@apply font-bold;
 }
 
 /*  Start of Shiki Twoslash CSS:
@@ -41,17 +58,20 @@ Code blocks structurally look like:
 
 pre {
   /* In theory shiki will overwrite these, but this is to make sure there are defaults regardless */
-  background-color: white;
-  color: black;
+	@apply bg-stone-700 bg-opacity-50 text-gray-200;
 
   @apply p-2;
 
   /* Important to allow the code to move horizontally; */
-  overflow-x: auto;
+	overflow: hidden;
   position: relative;
 }
+div:has(pre) > div {
+	@apply bg-stone-700 bg-opacity-50;
+}
+
 pre.shiki {
-  overflow-x: auto;
+	overflow: hidden;
 }
 pre.shiki:hover .dim {
   opacity: 1;
@@ -74,7 +94,8 @@ pre.shiki div.line {
 
 /** Don't show the language identifiers */
 pre.shiki .language-id {
-  display: none;
+	@apply absolute bottom-0 right-0 text-xs p-2;
+  /*display: none;*/
 }
 
 /** The tooltip-like which provides the LSP response */
@@ -95,7 +116,7 @@ pre.twoslash data-lsp:hover::before {
 }
 
 pre .code-container {
-  overflow: auto;
+  overflow: hidden;
 }
 
 pre code {
@@ -126,8 +147,12 @@ pre .error-behind {
 }
 pre .error {
   /*position: absolute;*/
-	@apply bg-slate-700 text-gray-100 flex items-center gap-2 text-xs;
+	@apply bg-stone-600 text-gray-100 flex items-center gap-2 text-xs;
 }
+pre .error span:first-child {
+	@apply flex-1;
+}
+
 pre .error .code::before {
 	content: "ts(";
   /*display: none;*/
@@ -145,7 +170,7 @@ pre .error-behind {
 /* Queries */
 pre .arrow {
   /* Transparent background */
-	@apply bg-slate-700 border-l-slate-700 border-t-slate-700;
+	@apply bg-stone-600 border-l-stone-600 border-t-stone-600;
   position: relative;
   top: -6px;
   margin-left: 0.1rem;
@@ -157,7 +182,7 @@ pre .arrow {
 }
 pre .popover {
   margin-bottom: 10px;
-	@apply bg-slate-700 text-gray-200 p-1 pt-0;
+	@apply bg-stone-600 text-gray-200 p-1 pt-0;
 
   display: inline-block;
 	/* TODO: Figure out how to avoid using these magic values */
@@ -170,21 +195,16 @@ pre .inline-completions ul.dropdown {
   display: inline-block;
   position: absolute;
   width: 240px;
-  background-color: gainsboro;
-  color: grey;
-  padding-top: 4px;
+	@apply bg-stone-600 pt-1 border-l-4 border-primary-600;
   font-family: var(--code-font);
   font-size: 0.8rem;
   margin: 0;
   padding: 0;
-  border-left: 4px solid #4b9edd;
 }
 pre .inline-completions ul.dropdown::before {
-  background-color: #4b9edd;
-  width: 2px;
+	@apply bg-primary-600 w-[2px] -left-0.5;
   position: absolute;
   top: -1.2rem;
-  left: -3px;
   content: " ";
 }
 pre .inline-completions ul.dropdown li {
@@ -196,7 +216,7 @@ pre .inline-completions ul.dropdown li.deprecated {
   text-decoration: line-through;
 }
 pre .inline-completions ul.dropdown li span.result-found {
-  color: #4b9edd;
+	@apply text-primary-500;
 }
 pre .inline-completions ul.dropdown li span.result {
   width: 100px;
@@ -233,7 +253,7 @@ data-lsp {
   /** Default annotation text to 200px */
   width: 200px;
   color: #187abf;
-  background-color: #fcf3d9 bb;
+	@apply bg-stone-700;
 }
 .tag-container .twoslash-annotation p {
   text-align: left;
@@ -281,4 +301,16 @@ pre .logger.log-log {
 pre .logger.log-log svg {
   margin-left: 6px;
   margin-right: 9px;
+}
+
+pre code .meta-line {
+	/*@apply h-0;*/
+	@apply flex max-w-full;
+}
+
+pre code .meta-line .popover-prefix {
+	/*flex-grow: 1*/
+}
+pre code .meta-line .popover {
+	@apply flex-shrink overflow-ellipsis;
 }

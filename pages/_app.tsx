@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { MDXProvider } from "@mdx-js/react";
 import { mdComponents } from "../components/mdComponents";
+import { SlideWrapper } from "../components/SlideWrapper";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -25,7 +26,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         rel="stylesheet"
       />
       <MDXProvider components={mdComponents}>
-        <Component {...pageProps} />
+        <SlideWrapper>
+          <Component {...pageProps} />
+        </SlideWrapper>
       </MDXProvider>
     </>
   );

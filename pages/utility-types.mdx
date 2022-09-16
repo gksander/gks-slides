@@ -1,0 +1,137 @@
+# Utility Types in TypeScript
+
+**TypeScript** offers some very useful utility types to help you wrangle types like a real type-cowboy, such as:
+
+- `Awaited`
+- `Omit`
+- `Pick`
+- `NonNullable`
+- `ReturnType`
+- `Parameters`
+- `Partial`
+- `Required`
+- `Exclude`
+- `Extract`
+
+## Let's take a peak! 👉
+
+---
+
+# The `Awaited` type
+
+Use this utility type to unwrap promises.
+
+```ts twoslash
+const getName = Promise.resolve("Roger" as const);
+
+type PromValue = Awaited<typeof getName>;
+//   ^?
+```
+
+Shoot, use it with recursive promises, too.
+
+```ts twoslash
+const getName = Promise
+	.resolve("Roger" as const)
+	.then(name => `Hello, ${name}` as const);
+
+type PromValue = Awaited<typeof getName>;
+//   ^?
+```
+
+---
+
+# The `Omit` type
+
+Ditch some keys from a type to "broaden" a type.
+
+```ts twoslash
+type Person = { name: string; age: number; height: number; }
+type AgelessPerson = Omit<Person, 'age'>;
+//   ^?
+```
+
+Use string union to omit multiple keys.
+
+```ts twoslash
+type Person = { name: string; age: number; height: number; }
+// ---cut---
+type NameOnlyPerson = Omit<Person, 'age' | 'height'>;
+//   ^?
+```
+
+---
+
+# The `Pick` type
+
+Kind of like `Omit`, but we select specific keys to *keep* (instead of to discard).
+
+```ts twoslash
+type Person = { name: string; age: number; height: number; }
+type NameOnlyPerson = Pick<Person, 'name'>;
+//   ^?
+
+// Use string union to pick multiple keys.
+type NameAndAge = Pick<Person, 'name' | 'age'>;
+//   ^?
+```
+
+---
+
+# The `NonNullable` type
+
+Remove `null` and `undefined` from your type.
+
+Handy if you'd like to derive a new type by stripping out `null` and `undefined` from a type that you already have.
+
+```ts twoslash
+// Maybe our API response has a nullable value
+type ApiResponse = { name: string; age: string; } | null;
+
+// But we want to use the non-null part as a type
+type Person = NonNullable<ApiResponse>;
+//   ^?
+```
+
+---
+
+# The `ReturnType` type
+
+Get the type of the return value of a function type. Very useful for deriving types from functions you already have sitting around.
+
+```ts twoslash
+import { useState } from "react";
+
+type UseStateReturn = ReturnType<typeof useState>;
+//   ^?
+```
+
+---
+
+# The `Parameters` type
+
+TODO
+
+---
+
+# The `Partial` type
+
+TODO
+
+---
+
+# The `Required` type
+
+TODO
+
+---
+
+# The `Exclude` type
+
+TODO
+
+---
+
+# The `Extract` type
+
+TODO

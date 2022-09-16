@@ -1,0 +1,92 @@
+# Why TypeScript?
+
+A *few* reasons why you might consider **TypeScript** over JavaScript.
+
+&nbsp;
+
+
+```tsx twoslash
+// @noErrors
+import { Bar } from "victory";
+
+const App = () => {
+  return (
+    <Bar d />
+//        ^|
+  )
+}
+
+```
+
+---
+
+# Catch Operation Mistakes
+
+With JS, you might walk right into unexpected behavior or runtime errors.
+
+```js
+const fruits = new Set(["apples", "bananas"]);
+const numFruits = fruits.length;
+````
+
+With **TypeScript**, catch these mistakes during development.
+
+```ts twoslash
+// @errors: 2339
+
+const fruits = new Set(["apples", "bananas"]);
+const numFruits = fruits.length;
+```
+
+---
+
+# Stronger Function Definitions
+
+With JS, you might need additional runtime checks for function argument types.
+
+```js twoslash
+const countItems = (items) => {
+
+}
+```
+
+With **TypeScript**, push these checks to the type system.
+
+```ts twoslash
+
+```
+
+...
+
+---
+
+# Better Function Calls
+
+With JS, you might not know if you're improperly calling a function until runtime.
+
+```js twoslash
+const shout = ({ message }) => {/*...*/};
+
+shout("HELLO!");
+```
+
+With **TypeScript**, catch these mistakes during development.
+
+```ts twoslash
+// @errors: 7031 2345
+const shout = ({ message }: { message: string }) => {/*...*/};
+
+shout("HELLO!");
+```
+
+---
+
+# Better Logic Branching
+
+...
+
+---
+
+# Sweet, sweet autocomplete
+
+...

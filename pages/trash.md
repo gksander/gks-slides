@@ -1,12 +1,32 @@
-# `code` is cool
+# Jana is hot
 
-Suppose $x \in \R$ and
+Let's talk about jana's ass.
 
-1. One `one`
-2. Two `two`
+- Juicy
+- Phat
+- Tasty
 
-* yeah
-* wassup
+$$
+f(x) = x^2 + c
+$$
+
+```ts twoslash
+const myConstant = 13;
+// ---cut---
+const f = (x: number) => x ** 2 + myConstant;
+//    ^?
+```
+
+---
+
+# Why TypeScript?
+
+```js
+const x = 16 / "hey";
+```
+
+and then `theCode` went to the market.
+
 
 ```ts twoslash
 const x = 13;
