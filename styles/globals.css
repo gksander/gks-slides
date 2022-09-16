@@ -77,11 +77,6 @@ pre.shiki .language-id {
   display: none;
 }
 
-/** When you mouse over the pre, show the underlines */
-pre.twoslash:hover data-lsp {
-  border-color: #747474;
-}
-
 /** The tooltip-like which provides the LSP response */
 pre.twoslash data-lsp:hover::before {
   content: attr(lsp);
@@ -126,36 +121,27 @@ pre .query {
   display: inline-block;
 }
 
-/* In order to have the 'popped out' style design and to not break the layout
-  /* we need to place a fake and un-selectable copy of the error which _isn't_ broken out
-  /* behind the actual error message.
-
-  /* This sections keeps both of those two in in sync  */
-
 pre .error,
 pre .error-behind {
-  margin-left: -14px;
-  margin-top: 8px;
-  margin-bottom: 4px;
-  padding: 6px;
-  padding-left: 14px;
-  width: calc(100% - 20px);
+	@apply mt-2 mb-1 p-3 rounded-sm border-l-[6px] border-red-500;
+  /*width: calc(100% - 20px);*/
   white-space: pre-wrap;
   display: block;
 }
 pre .error {
-  position: absolute;
-  background-color: #fee;
-  border-left: 2px solid #bf1818;
-  /* Give the space to the error code */
-  display: flex;
-  align-items: center;
-  color: black;
+  /*position: absolute;*/
+	@apply bg-slate-700 text-gray-100 flex items-center gap-2 text-xs;
 }
-pre .error .code {
-  display: none;
+pre .error .code::before {
+	content: "ts(";
+  /*display: none;*/
 }
+pre .error .code::after {
+	content: ")"
+}
+
 pre .error-behind {
+	display: none;
   user-select: none;
   visibility: transparent;
   color: #fee;
@@ -163,13 +149,11 @@ pre .error-behind {
 /* Queries */
 pre .arrow {
   /* Transparent background */
-  background-color: #eee;
+	@apply bg-slate-700 border-l-slate-700 border-t-slate-700;
   position: relative;
-  top: -7px;
+  top: -6px;
   margin-left: 0.1rem;
   /* Edges */
-  border-left: 1px solid #eee;
-  border-top: 1px solid #eee;
   transform: translateY(25%) rotate(45deg);
   /* Size */
   height: 8px;
@@ -177,8 +161,10 @@ pre .arrow {
 }
 pre .popover {
   margin-bottom: 10px;
-  background-color: #eee;
+	@apply bg-slate-700 text-gray-200 p-1 pt-0;
+
   display: inline-block;
+	/* TODO: Figure out how to avoid using these magic values */
   padding: 0 0.5rem 0.3rem;
   margin-top: 10px;
   border-radius: 3px;

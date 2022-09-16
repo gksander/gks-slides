@@ -28,7 +28,7 @@ const Section = ({ children }: Props) => {
 };
 
 const H1 = ({ children }: Props) => (
-  <h1 className="text-4xl font-medium mb-3">{children}</h1>
+  <h1 className="text-4xl font-medium mb-4">{children}</h1>
 );
 
 const Pre = (props: Props & { className: string; style: object }) => {
@@ -48,9 +48,24 @@ const P = (props: Props) => (
   <p {...props} className={`${props.className} mb-2`} />
 );
 
+const Ol = (props: Props) => (
+  <ol {...props} className={`${props.className} mb-3 list-decimal ml-6`} />
+);
+
+const Ul = (props: Props) => (
+  <ul {...props} className={`${props.className} mb-3 list-disc ml-6`} />
+);
+
+const Li = (props: Props) => (
+  <li {...props} className={`${props.className} mb-2`} />
+);
+
 export const mdComponents = {
   section: Section,
   h1: H1,
   pre: Pre,
   p: P,
+  ol: Ol,
+  ul: Ul,
+  li: Li,
 };

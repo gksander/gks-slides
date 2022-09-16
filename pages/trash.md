@@ -2,7 +2,11 @@
 
 Suppose $x \in \R$ and
 
-What's up, if `x` is shit then shit
+1. One `one`
+2. Two `two`
+
+* yeah
+* wassup
 
 ```ts twoslash
 const x = 13;
