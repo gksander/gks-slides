@@ -1,10 +1,4 @@
-# Jana is hot
-
-Let's talk about jana's ass.
-
-- Juicy
-- Phat
-- Tasty
+# Hello
 
 $$
 f(x) = x^2 + c
