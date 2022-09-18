@@ -33,6 +33,7 @@
     "prettier": "^2.7.1",
     "tailwindcss": "^3.1.8",
     "typescript": "4.8.3",
-    "victory": "^36.6.7"
+    "victory": "^36.6.7",
+    "zod": "^3.19.1"
   }
 }

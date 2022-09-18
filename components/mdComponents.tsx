@@ -50,6 +50,9 @@ const H1 = ({ children }: Props) => (
 const H2 = (props: Props) => (
   <h2 {...props} className={`${props.className} text-2xl font-medium mb-5`} />
 );
+const H3 = (props: Props) => (
+  <h3 {...props} className={`${props.className} text-xl font-medium mb-5`} />
+);
 
 const Pre = (props: Props) => {
   return (
@@ -91,6 +94,7 @@ export const mdComponents = {
   section: Section,
   h1: H1,
   h2: H2,
+  h3: H3,
   pre: Pre,
   p: P,
   ol: Ol,
