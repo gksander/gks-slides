@@ -57,7 +57,7 @@ const H3 = (props: Props) => (
 const Pre = (props: Props) => {
   return (
     <div
-      className="rounded-lg overflow-hidden border-2 border-stone-700 mb-5"
+      className="rounded-lg overflow-hidden border-2 border-stone-700 mb-5 code-block"
       // style={props.style}
     >
       <div className="p-2 flex gap-2">
@@ -90,6 +90,21 @@ const Strong = (props: Props) => (
   <strong {...props} className={`${props.className} text-primary-500`} />
 );
 
+const Img = (props: Props & { src: string }) => {
+  let width;
+  try {
+    width = new URL(props.src).searchParams.get("width") || undefined;
+  } catch {}
+
+  return (
+    <img
+      {...props}
+      className={`${props.className} mx-auto max-w-[75%] drop-shadow-lg drop-shadow-pink-200`}
+      style={{ width }}
+    />
+  );
+};
+
 export const mdComponents = {
   section: Section,
   h1: H1,
@@ -101,4 +116,5 @@ export const mdComponents = {
   ul: Ul,
   li: Li,
   strong: Strong,
+  img: Img,
 };

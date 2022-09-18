@@ -58,7 +58,7 @@ Code blocks structurally look like:
 
 pre {
   /* In theory shiki will overwrite these, but this is to make sure there are defaults regardless */
-	@apply bg-stone-700 bg-opacity-70 text-gray-200;
+	@apply text-gray-200;
 
   @apply p-2;
 
@@ -66,8 +66,8 @@ pre {
 	overflow: hidden;
   position: relative;
 }
-div:has(pre) > div {
-	@apply bg-stone-700 bg-opacity-50;
+div.code-block {
+	@apply bg-stone-700 bg-opacity-70;
 }
 
 pre.shiki {
@@ -312,4 +312,9 @@ pre code .meta-line .popover-prefix {
 }
 pre code .meta-line .popover {
 	@apply flex-shrink overflow-ellipsis text-xs;
+}
+
+/* Katex styles */
+div.math-display {
+	@apply text-xl;
 }

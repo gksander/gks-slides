@@ -1,8 +1,12 @@
 # Hello
 
+Hello, complexity is **$O(n^2)$**
+
 $$
 f(x) = x^2 + c
 $$
+
+![typescript](https://www.freepnglogos.com/uploads/cat-png/cat-sweety-white-brown-11.png?width=2.5in)
 
 ```ts twoslash
 const myConstant = 13;
