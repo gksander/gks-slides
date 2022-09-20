@@ -17,7 +17,6 @@ import { Img } from "../components/img";
 import { A } from "../components/a";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  console.log(pageProps);
   return (
     <>
       <link

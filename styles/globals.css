@@ -78,8 +78,7 @@ pre.shiki div.highlight {
   padding: 0;
 }
 pre.shiki div.highlight {
-  opacity: 1;
-  background-color: #f1f8ff;
+	@apply bg-stone-600 bg-opacity-50;
 }
 pre.shiki div.line {
   min-height: 1rem;
