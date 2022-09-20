@@ -4,7 +4,7 @@ import * as React from "react";
 export const Pre = (props: Props) => {
   return (
     <div
-      className="rounded-lg overflow-hidden border-2 mb-5 code-block"
+      className="rounded-lg print:overflow-hidden border-2 mb-5 code-block"
       // style={props.style}
     >
       <div className="p-2 flex gap-2">

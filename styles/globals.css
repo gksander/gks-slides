@@ -57,21 +57,14 @@ Code blocks structurally look like:
 */
 
 pre {
-  /* In theory shiki will overwrite these, but this is to make sure there are defaults regardless */
-	@apply text-gray-200;
-
-  @apply p-2;
-
-  /* Important to allow the code to move horizontally; */
-	overflow: hidden;
-  position: relative;
+	@apply p-2 text-gray-200 print:overflow-hidden relative;
 }
 div.code-block {
 	@apply bg-stone-800 bg-opacity-70 border-stone-800;
 }
 
 pre.shiki {
-	overflow: hidden;
+	@apply print:overflow-hidden;
 }
 pre.shiki:hover .dim {
   opacity: 1;
@@ -100,17 +93,17 @@ pre.shiki .language-id {
 
 /** The tooltip-like which provides the LSP response */
 pre.twoslash data-lsp:hover::before {
+	@apply text-xs text-gray-200;
+
   content: attr(lsp);
   position: absolute;
   transform: translate(0, 1rem);
 
   background-color: #3f3f3f;
-  color: #fff;
   text-align: left;
   padding: 5px 8px;
   border-radius: 2px;
   font-family: "JetBrains Mono", Menlo, Monaco, Consolas, Courier New, monospace;
-  font-size: 14px;
   white-space: pre-wrap;
   z-index: 100;
 }
