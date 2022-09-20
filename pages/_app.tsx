@@ -26,9 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         rel="stylesheet"
       />
       <MDXProvider components={mdComponents}>
-        <SlideWrapper>
-          <Component {...pageProps} />
-        </SlideWrapper>
+        <Component {...pageProps} />
       </MDXProvider>
     </>
   );

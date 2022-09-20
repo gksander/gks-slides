@@ -2,7 +2,11 @@ import * as React from "react";
 
 type Props = React.PropsWithChildren<{ className: string; style: object }>;
 
-const Section = ({ children, ...rest }: Props) => {
+const Section = ({
+  children,
+  numSlides,
+  i,
+}: Props & { numSlides: number; i: number }) => {
   return (
     <section className="w-[8.5in] h-[8.5in] break-after-page transform-none text-gray-100 relative slide">
       <div className="absolute inset-0 bg-gradient-to-t from-stone-900 to-stone-800">
@@ -23,7 +27,9 @@ const Section = ({ children, ...rest }: Props) => {
 
       {/* headshot/signature in background */}
       <div className="absolute bottom-0 inset-x-0 flex justify-between items-end">
-        <div className="page-count p-3 text-sm"></div>
+        <div className="page-count p-3 text-sm">
+          {+i + 1} of {numSlides}
+        </div>
         <div className="pb-3 text-xs text-center font-bold tracking-wide">
           @gksander
         </div>
@@ -57,7 +63,7 @@ const H3 = (props: Props) => (
 const Pre = (props: Props) => {
   return (
     <div
-      className="rounded-lg overflow-hidden border-2 border-stone-700 mb-5 code-block"
+      className="rounded-lg overflow-hidden border-2 mb-5 code-block"
       // style={props.style}
     >
       <div className="p-2 flex gap-2">

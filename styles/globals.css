@@ -67,7 +67,7 @@ pre {
   position: relative;
 }
 div.code-block {
-	@apply bg-stone-700 bg-opacity-70;
+	@apply bg-stone-800 bg-opacity-70 border-stone-800;
 }
 
 pre.shiki {
@@ -170,7 +170,7 @@ pre .error-behind {
 /* Queries */
 pre .arrow {
   /* Transparent background */
-	@apply bg-stone-600 border-l-stone-600 border-t-stone-600;
+	@apply bg-stone-700 border-l-stone-700 border-t-stone-700;
   position: relative;
   top: -6px;
   margin-left: 0.1rem;
@@ -182,7 +182,7 @@ pre .arrow {
 }
 pre .popover {
   margin-bottom: 10px;
-	@apply bg-stone-600 text-gray-200 p-1 pt-0;
+	@apply bg-stone-700 text-gray-200 p-1 pt-0;
 
   display: inline-block;
 	/* TODO: Figure out how to avoid using these magic values */

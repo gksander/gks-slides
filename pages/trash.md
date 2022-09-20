@@ -6,13 +6,23 @@ $$
 f(x) = x^2 + c
 $$
 
-![typescript](https://www.freepnglogos.com/uploads/cat-png/cat-sweety-white-brown-11.png?width=2.5in)
+![typescript](https://www.freepnglogos.com/uploads/cat-png/cat-sweety-white-brown-11.png?width=1.5in)
 
 ```ts twoslash
 const myConstant = 13;
 // ---cut---
 const f = (x: number) => x ** 2 + myConstant;
 //    ^?
+```
+
+---
+
+# Let's try Python
+
+```python
+for x in range(5):
+  if x > 3:
+    return x
 ```
 
 ---
