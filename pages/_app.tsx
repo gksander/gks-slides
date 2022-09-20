@@ -14,8 +14,10 @@ import { Ul } from "../components/ul";
 import { Li } from "../components/li";
 import { Strong } from "../components/strong";
 import { Img } from "../components/img";
+import { A } from "../components/a";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  console.log(pageProps);
   return (
     <>
       <link
@@ -50,6 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             li: Li,
             strong: Strong,
             img: Img,
+            a: A,
           }}
         >
           <Component {...pageProps} />

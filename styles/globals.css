@@ -109,7 +109,10 @@ pre.twoslash data-lsp:hover::before {
 }
 
 pre .code-container {
-  overflow: hidden;
+	@apply print:overflow-hidden overflow-x-auto;
+}
+pre .code-container::-webkit-scrollbar {
+	@apply hidden;
 }
 
 pre code {
