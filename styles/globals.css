@@ -115,7 +115,7 @@ pre .code-container::-webkit-scrollbar {
 }
 
 pre code {
-  font-size: 0.8rem;
+  /*font-size: 0.9rem;*/
   font-family: "JetBrains Mono", Menlo, Monaco, Consolas, Courier New, monospace;
   white-space: pre;
   -webkit-overflow-scrolling: touch;

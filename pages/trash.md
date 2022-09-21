@@ -63,3 +63,22 @@ const x = Math.sqrt(b ** 2 - 4 * a * c) / (2 * a);
 
 const y = x / "hello";
 ```
+
+---
+
+# The annoying generics of `React.forwardRef`.
+
+&nbsp;
+
+```tsx twoslash {1}
+type Ref = any;
+type Props = any;
+// ---cut---
+React.forwardRef<Ref, Props>((props, ref) => {
+	return <div />;
+});
+```
+
+&nbsp;
+
+### **Why** are the generics in the order `<Ref, Props>` when the parameters are in the order `(props, ref)`?
