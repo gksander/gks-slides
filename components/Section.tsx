@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Props } from "./types";
 import { useSlideSize } from "./DeckWrapper";
+import { toBlob } from "html-to-image";
 
 export const Section = ({
   children,
@@ -9,9 +10,12 @@ export const Section = ({
 }: Props & { numSlides: number; i: number }) => {
   const { slideWidth, slideHeight, isPrinting } = useSlideSize();
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const slideRef = React.useRef<HTMLDivElement>(null);
   const [scale, setScale] = React.useState(0);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
+  const [isCapturingSlide, setIsCapturingSlide] = React.useState(false);
+  const isPrintingOrCapturing = isPrinting || isCapturingSlide;
 
   const measure = React.useCallback(() => {
     if (!containerRef.current || !slideWidth || !slideHeight) return;
@@ -36,6 +40,24 @@ export const Section = ({
     setTop(top);
   }, [slideWidth, slideHeight]);
 
+  const captureSlide = React.useCallback(async () => {
+    if (!slideRef.current) return;
+
+    setIsCapturingSlide(true);
+    await wait(500);
+
+    const blob = await toBlob(slideRef.current);
+    if (blob) {
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          "image/png": blob,
+        }),
+      ]);
+    }
+
+    setIsCapturingSlide(false);
+  }, []);
+
   React.useEffect(() => {
     measure();
     window.addEventListener("resize", measure);
@@ -49,12 +71,16 @@ export const Section = ({
       <div className="w-full h-full" ref={containerRef}>
         {/* This is the actual Section slide/card */}
         <div
+          ref={slideRef}
           className="w-[8.5in] h-[8.5in] break-after-page transform-none text-gray-100 relative slide shadow-xl print:shadow-none"
           style={{
-            transform: !isPrinting
+            transform: !isPrintingOrCapturing
               ? `translate(${left}px, ${top}px) scale(${scale})`
               : "initial",
             transformOrigin: "top left",
+          }}
+          onClick={(e) => {
+            if (e.metaKey) captureSlide();
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-t from-stone-900 to-stone-800">
@@ -75,7 +101,11 @@ export const Section = ({
 
           {/* headshot/signature in background */}
           <div className="absolute bottom-0 inset-x-0 flex justify-between items-end">
-            <div className="page-count p-3 text-sm">
+            <div
+              className={`page-count p-3 text-sm ${
+                isPrintingOrCapturing && "invisible"
+              }`}
+            >
               {+i + 1} of {numSlides}
             </div>
             <div className="pb-3 text-xs text-center font-bold tracking-wide">
@@ -98,3 +128,5 @@ export const Section = ({
     </section>
   );
 };
+
+const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
