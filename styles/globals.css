@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--slide-font-size: 0.24in;
+	--code-font-size: 1em;
+}
+
 body,
 html {
   padding: 0;
@@ -25,10 +30,6 @@ html {
 code:not(pre code) {
   font-family: 'JetBrains Mono', monospace;
   @apply bg-gray-100 bg-opacity-10 px-2 rounded;
-}
-
-:root {
-	--num-slides: 0;
 }
 
 /* Add some slide numbers */
@@ -115,7 +116,7 @@ pre .code-container::-webkit-scrollbar {
 }
 
 pre code {
-  /*font-size: 0.9rem;*/
+	font-size: var(--code-font-size);
   font-family: "JetBrains Mono", Menlo, Monaco, Consolas, Courier New, monospace;
   white-space: pre;
   -webkit-overflow-scrolling: touch;
@@ -192,7 +193,7 @@ pre .inline-completions ul.dropdown {
   width: 240px;
 	@apply bg-stone-600 pt-1 border-l-4 border-primary-600;
   font-family: var(--code-font);
-  font-size: 0.8rem;
+  font-size: calc(0.8 * var(--code-font-size));
   margin: 0;
   padding: 0;
 }
@@ -252,7 +253,7 @@ data-lsp {
 }
 .tag-container .twoslash-annotation p {
   text-align: left;
-  font-size: 0.8rem;
+  font-size:  calc(0.8 * var(--code-font-size));
   line-height: 0.9rem;
 }
 .tag-container .twoslash-annotation svg {

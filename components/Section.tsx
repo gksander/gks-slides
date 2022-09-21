@@ -7,7 +7,14 @@ export const Section = ({
   children,
   numSlides,
   i,
-}: Props & { numSlides: number; i: number }) => {
+  fontSize,
+  codeFontSize,
+}: Props & {
+  numSlides: number;
+  i: number;
+  fontSize?: string;
+  codeFontSize?: string;
+}) => {
   const { slideWidth, slideHeight, isPrinting } = useSlideSize();
   const containerRef = React.useRef<HTMLDivElement>(null);
   const slideRef = React.useRef<HTMLDivElement>(null);
@@ -67,7 +74,14 @@ export const Section = ({
   }, [measure]);
 
   return (
-    <section className="h-screen print:h-auto p-0 sm:p-2 md:p-4 print:p-0 snap-start">
+    <section
+      className="h-screen print:h-auto p-0 sm:p-2 md:p-4 print:p-0 snap-start"
+      style={{
+        // @ts-ignore
+        "--slide-font-size": fontSize || "inherit",
+        "--code-font-size": codeFontSize || "inherit",
+      }}
+    >
       <div className="w-full h-full" ref={containerRef}>
         {/* This is the actual Section slide/card */}
         <div

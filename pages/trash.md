@@ -66,6 +66,8 @@ const y = x / "hello";
 
 ---
 
+{ "fontSize": "0.2in", "codeFontSize": "0.25in" }
+
 # The annoying generics of `React.forwardRef`.
 
 &nbsp;
@@ -78,6 +80,8 @@ React.forwardRef<Ref, Props>((props, ref) => {
 	return <div />;
 });
 ```
+
+Some text for comparison
 
 &nbsp;
 
