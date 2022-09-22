@@ -1,10 +1,6 @@
 import * as React from "react";
-import { DeckTheme, Props } from "./themeTypes";
+import { DeckTheme } from "./themeTypes";
 import { BaseCard, CardProps } from "./util/BaseCard";
-
-const CardWrapper = ({ children }: React.PropsWithChildren<{}>) => {
-  return <React.Fragment></React.Fragment>;
-};
 
 const card = (props: CardProps) => {
   return (
@@ -31,7 +27,7 @@ const card = (props: CardProps) => {
           {/* headshot/signature in background */}
           <div className="absolute bottom-0 inset-x-0 flex justify-between items-end">
             <div
-              className={`page-count p-3 text-sm ${
+              className={`p-3 text-sm font-bold ${
                 isPrintingOrCapturing && "invisible"
               }`}
             >
@@ -61,4 +57,20 @@ const card = (props: CardProps) => {
 export const gks: DeckTheme = {
   card,
   nodes: {},
+  head: (
+    <React.Fragment>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossOrigin="anonymous"
+      />
+      <link
+        href="https://fonts.googleapis.com/css2?&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet"
+        crossOrigin="anonymous"
+      />
+    </React.Fragment>
+  ),
+  fontFamily: `'Montserrat', sans-serif`,
 };

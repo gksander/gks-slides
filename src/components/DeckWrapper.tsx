@@ -5,6 +5,7 @@ type DeckWrapperProps = React.PropsWithChildren<{
   height: string;
   fontSize: string;
   codeFontSize: string;
+  fontFamily: string;
 }>;
 
 export const DeckWrapper = ({
@@ -13,6 +14,7 @@ export const DeckWrapper = ({
   height,
   fontSize,
   codeFontSize,
+  fontFamily,
 }: DeckWrapperProps) => {
   const offscreenSlideRef = React.useRef<HTMLDivElement>(null);
   const mainRef = React.useRef<HTMLDivElement>(null);
@@ -88,6 +90,7 @@ export const DeckWrapper = ({
           // @ts-ignore
           "--slide-font-size": fontSize || "inherit",
           "--code-font-size": codeFontSize || "inherit",
+          fontFamily,
         }}
         ref={mainRef}
       >

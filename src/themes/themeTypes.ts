@@ -26,4 +26,7 @@ export type DeckTheme = {
   };
 
   directives?: {};
+
+  head?: React.ReactNode;
+  fontFamily?: string;
 };

@@ -1,5 +1,5 @@
 ---
-theme: formidable
+theme: gks
 width: 8.5in
 height: 6in
 ---
@@ -10,8 +10,8 @@ $$
 f(x) = x^2
 $$
 
-```ts
-const x = 13;
+```ts twoslash
+const getSquareRoot = (x: number, y: number) => Math.sqrt(Math.pow(x, 2));
 ```
 
 ::tip

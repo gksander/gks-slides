@@ -17,6 +17,7 @@ import { gks } from "../themes/gks";
 import { formidable } from "../themes/formidable";
 import { defaultTheme } from "../themes/defaultTheme";
 import { CardProps } from "../themes/util/BaseCard";
+import Head from "next/head";
 
 const themes = {
   gks,
@@ -41,34 +42,40 @@ export default function Deck({
   const Component = getMDXComponent(code);
   const activeTheme = themes[theme];
 
-  console.log(width, height);
-
   return (
-    <DeckWrapper
-      width={width}
-      height={height}
-      fontSize={fontSize}
-      codeFontSize={codeFontSize}
-    >
-      <Component
-        components={{
-          card: (props: CardProps) =>
-            React.createElement(activeTheme.card, { ...props, width, height }),
-          ...defaultTheme.nodes,
-          ...activeTheme.nodes,
-          directive: () => null,
-          // directive: ({
-          //   componentName,
-          //   ...rest
-          // }: React.PropsWithChildren<{ componentName: string }>) => {
-          //   const Component =
-          //     // @ts-ignore
-          //     ComponentMap[componentName] || ComponentMap.noop;
-          //   return <Component {...rest} />;
-          // },
-        }}
-      />
-    </DeckWrapper>
+    <React.Fragment>
+      <DeckWrapper
+        width={width}
+        height={height}
+        fontSize={fontSize}
+        codeFontSize={codeFontSize}
+        fontFamily={activeTheme.fontFamily || "sans-serif"}
+      >
+        <Component
+          components={{
+            card: (props: CardProps) =>
+              React.createElement(activeTheme.card, {
+                ...props,
+                width,
+                height,
+              }),
+            ...defaultTheme.nodes,
+            ...activeTheme.nodes,
+            directive: () => null,
+            // directive: ({
+            //   componentName,
+            //   ...rest
+            // }: React.PropsWithChildren<{ componentName: string }>) => {
+            //   const Component =
+            //     // @ts-ignore
+            //     ComponentMap[componentName] || ComponentMap.noop;
+            //   return <Component {...rest} />;
+            // },
+          }}
+        />
+      </DeckWrapper>
+      {activeTheme.head && <Head>{activeTheme.head}</Head>}
+    </React.Fragment>
   );
 }
 
