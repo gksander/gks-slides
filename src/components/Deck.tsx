@@ -6,8 +6,6 @@ type DeckProps = React.PropsWithChildren<{
   height?: string;
 }>;
 
-console.log("GOT IMPORTED???");
-
 export const Deck = ({ children, ...rest }: DeckProps) => {
   console.log(rest);
   return <>{children}</>;

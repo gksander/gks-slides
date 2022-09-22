@@ -1,12 +1,14 @@
+import type { Node } from "unist";
+import type { Plugin } from "unified";
 import { visit } from "unist-util-visit";
 
 /**
  * Turn our directives into nodes with properties that can be picked up by MDX on the React side.
  */
-export const directives = () => {
+export const directives: Plugin = () => {
   return (tree) => {
     visit(tree, (node) => {
-      if (node.type === "containerDirective" || node.type === "leafDirective") {
+      if (isDirectiveNode(node)) {
         const data = node.data || (node.data = {});
 
         // Deck config
@@ -30,4 +32,10 @@ export const directives = () => {
       }
     });
   };
+};
+
+const isDirectiveNode = <T extends Node>(
+  node: T
+): node is T & { name: string; attributes?: Record<string, string> } => {
+  return node.type === "containerDirective" || node.type === "leafDirective";
 };

@@ -1,7 +1,9 @@
+import type { Parent, Node } from "unist";
+import type { Plugin } from "unified";
 import { visit } from "unist-util-visit";
 import { remove } from "unist-util-remove";
 
-export const sectionize = () => {
+export const sectionize: Plugin<any, Parent<Node>> = () => {
   return (tree) => {
     let cards = [],
       sectionItems = [];
@@ -51,22 +53,22 @@ export const sectionize = () => {
     /**
      * Build out our deck component. We'll collect deck props to pass in to the deck
      */
-    const deckProps = {};
-    visit(tree, (node) => {
-      if (node.data?.hName === "deckConfig" && node.data?.hProperties) {
-        Object.assign(deckProps, node.data.hProperties);
-      }
-    });
+    // const deckProps = {};
+    // visit(tree, (node) => {
+    //   if (node.data?.hName === "deckConfig" && node.data?.hProperties) {
+    //     Object.assign(deckProps, node.data.hProperties);
+    //   }
+    // });
+    //
+    // const deck = {
+    //   type: "deck",
+    //   children: cards,
+    //   data: {
+    //     hName: "deck",
+    //     hProperties: deckProps,
+    //   },
+    // };
 
-    const deck = {
-      type: "deck",
-      children: cards,
-      data: {
-        hName: "deck",
-        hProperties: deckProps,
-      },
-    };
-
-    tree.children = [deck];
+    tree.children = cards;
   };
 };

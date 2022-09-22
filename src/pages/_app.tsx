@@ -18,7 +18,6 @@ import { A } from "../components/a";
 import { Deck } from "../components/Deck";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  console.log(Component);
   return (
     <>
       <link
@@ -39,44 +38,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         rel="stylesheet"
         crossOrigin="anonymous"
       />
-      <DeckWrapper>
-        <Component
-          {...pageProps}
-          components={{
-            card: Card,
-            h1: H1,
-            h2: H2,
-            h3: H3,
-            pre: Pre,
-            p: P,
-            ol: Ol,
-            ul: Ul,
-            li: Li,
-            strong: Strong,
-            img: Img,
-            a: A,
-            directive: ({
-              componentName,
-              ...rest
-            }: React.PropsWithChildren<{ componentName: string }>) => {
-              const Component =
-                // @ts-ignore
-                ComponentMap[componentName] || ComponentMap.noop;
-              return <Component {...rest} />;
-            },
-          }}
-        />
-      </DeckWrapper>
+      <Component {...pageProps} />
     </>
   );
 }
-
-const ComponentMap = {
-  "side-by-side": (props: any) => <div className="flex">{props.children}</div>,
-  left: (props: any) => <div>{props.children}</div>,
-  right: (props: any) => <div>{props.children}</div>,
-  tip: () => <div>HERES A TIP</div>,
-  noop: () => null,
-};
 
 export default MyApp;
