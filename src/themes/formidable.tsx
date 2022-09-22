@@ -2,8 +2,6 @@ import * as React from "react";
 import { DeckTheme, Props } from "./themeTypes";
 import { BaseCard, CardProps } from "./util/BaseCard";
 
-const h1 = (props: Props) => <h1 {...props} />;
-
 const card = (props: CardProps) => {
   const fSize = { width: 83, height: 109 } as const;
 
@@ -13,7 +11,7 @@ const card = (props: CardProps) => {
       renderContents={({ children, cardWidth, cardHeight }) => (
         <React.Fragment>
           {/* Background */}
-          <div className="absolute inset-0 bg-fmd-gray">
+          <div className="absolute inset-0 bg-fmd-gray text-fmd-white">
             {/* Formidable F	*/}
             <svg
               viewBox={`0 0 ${fSize.width} ${fSize.height}`}
@@ -27,7 +25,92 @@ const card = (props: CardProps) => {
               />
             </svg>
 
-            {IsoBox}
+            <svg
+              viewBox={`0 0 ${cardWidth} ${cardHeight}`}
+              className="absolute inset-0"
+              strokeWidth={cardWidth / 350}
+            >
+              {/* top-left line */}
+              {(() => {
+                const size = cardWidth / 20;
+                const a = Math.PI / 4;
+
+                return (
+                  <line
+                    x1={5 * Math.cos(a + Math.PI)}
+                    y1={size - 5 * Math.sin(a + Math.PI)}
+                    x2={size + 5 * Math.cos(a)}
+                    y2={-5 * Math.sin(a)}
+                    className="stroke-current"
+                  />
+                );
+              })()}
+
+              {/* middle-left line */}
+              {(() => {
+                const down = cardHeight / 2.2;
+                const len = cardWidth / 6;
+                const a = Math.PI / 4;
+
+                return (
+                  <line
+                    x1={-5 * Math.cos(a + Math.PI)}
+                    y1={down - 5 * Math.sin(a + Math.PI)}
+                    x2={len * Math.cos(a)}
+                    y2={down - len * Math.sin(a)}
+                    className="stroke-current"
+                  />
+                );
+              })()}
+
+              {/* top-right line */}
+              {(() => {
+                const down = cardHeight / 9;
+                const len = cardWidth / 12;
+                const a = (5 * Math.PI) / 4;
+
+                return (
+                  <line
+                    x1={cardWidth + 5 * Math.cos(a + Math.PI)}
+                    y1={down - 5 * Math.sin(a + Math.PI)}
+                    x2={cardWidth + len * Math.cos(a)}
+                    y2={down - len * Math.sin(a)}
+                    className="stroke-current"
+                  />
+                );
+              })()}
+
+              {/* bottom-right line	*/}
+              {(() => {
+                const size = cardWidth / 10;
+                const a = (5 * Math.PI) / 4;
+
+                return (
+                  <line
+                    x1={cardWidth + 5 * Math.cos(a + Math.PI)}
+                    y1={cardHeight - size - 5 * Math.sin(a + Math.PI)}
+                    x2={cardWidth - size + 5 * Math.cos(a)}
+                    y2={cardHeight - 5 * Math.sin(a)}
+                    className="stroke-current"
+                  />
+                );
+              })()}
+
+              {/* bottom-right circle	*/}
+              {(() => {
+                const down = cardHeight - cardWidth / 10;
+                const r = cardWidth / 40;
+
+                return (
+                  <circle
+                    cx={cardWidth}
+                    cy={down}
+                    r={r}
+                    className="stroke-current fill-transparent"
+                  />
+                );
+              })()}
+            </svg>
           </div>
 
           <div className="absolute inset-0 p-slide-4 text-fmd-navy">
@@ -39,569 +122,15 @@ const card = (props: CardProps) => {
   );
 };
 
-const IsoBox = (
-  <svg
-    viewBox="0 0 524 535"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className="w-slide-24 absolute left-slide-1 bottom-slide-1"
-  >
-    <path
-      fill="url(#a)"
-      fillOpacity={0.8}
-      style={{
-        mixBlendMode: "overlay",
-      }}
-      d="M64.371.665H459.64v330.362H64.371z"
-    />
-    <path
-      fill="url(#b)"
-      style={{
-        mixBlendMode: "overlay",
-      }}
-      d="M64.373 197.165H459.63v334.169H64.373z"
-    />
-    <path
-      transform="scale(1.22477 .70707) rotate(-45 738.59 231.606)"
-      fill="#000"
-      fillOpacity={0.1}
-      d="M0 0h228.204v228.204H0z"
-      style={{
-        mixBlendMode: "multiply",
-      }}
-    />
-    <path
-      fill="#314C9A"
-      d="m262.004 216.936 197.627 114.108v25.351L262.006 242.287zM64.373 331.039 262 216.931v25.35L64.371 356.39z"
-    />
-    <g filter="url(#c)">
-      <path
-        fill="#314C9A"
-        d="m262.003 242.282 197.634 114.096-197.634 114.095L64.369 356.378z"
-      />
-    </g>
-    <path
-      fill="#314C9A"
-      d="m64.371 331.028 197.627 114.108v25.351L64.373 356.38z"
-    />
-    <path
-      fill="#314C9A"
-      d="m64.371 331.028 197.627 114.108v25.351L64.373 356.38zM262.004 445.136l197.627-114.108v25.35L262.002 470.488z"
-    />
-    <path
-      fill="#000"
-      fillOpacity={0.4}
-      d="m262.004 445.136 197.627-114.108v25.35L262.002 470.488z"
-    />
-    <path
-      fill="#314C9A"
-      d="m64.371 331.034 197.634-114.096L459.64 331.034 262.005 445.13z"
-    />
-    <path
-      fill="#314C9A"
-      d="m64.371 331.034 197.634-114.096L459.64 331.034 262.005 445.13z"
-    />
-    <path
-      transform="scale(1.22477 .70707) rotate(-45 591.421 170.647)"
-      fill="url(#d)"
-      style={{
-        mixBlendMode: "overlay",
-      }}
-      d="M0 0h228.204v228.204H0z"
-    />
-    <path
-      transform="scale(1.22477 .70707) rotate(-45 591.421 170.647)"
-      fill="url(#e)"
-      fillOpacity={0.2}
-      d="M0 0h228.204v228.204H0z"
-    />
-    <path
-      fill="url(#f)"
-      fillOpacity={0.2}
-      style={{
-        mixBlendMode: "overlay",
-      }}
-      d="M64.367.665h395.272v469.822H64.367z"
-    />
-    <path
-      fill="#8FD8F7"
-      d="m367.959 141.478 3.29 1.9.001 5.322-3.29-1.9zM256.603 205.771l111.355-64.296v5.322l-111.355 64.296z"
-    />
-    <path
-      fill="#8FD8F7"
-      d="m367.959 146.798 3.291 1.9-111.36 64.288-3.29-1.9z"
-    />
-    <path
-      fill="#8FD8F7"
-      d="m256.602 205.765 3.29 1.9.001 5.322-3.29-1.9zM259.894 207.667l111.355-64.296v5.322L259.894 212.99z"
-    />
-    <path
-      fill="#000"
-      fillOpacity={0.1}
-      d="m259.894 207.667 111.355-64.296v5.322L259.894 212.99z"
-    />
-    <path
-      fill="#8FD8F7"
-      d="m256.602 205.766 111.359-64.288 3.291 1.9-111.359 64.288z"
-    />
-    <path
-      fill="#fff"
-      fillOpacity={0.3}
-      d="m256.602 205.766 111.359-64.288 3.291 1.9-111.359 64.288z"
-    />
-    <path
-      fill="#FEC950"
-      d="m248.581 356.7 3.29 1.9.001 5.322-3.29-1.9zM137.225 420.994l111.355-64.296v5.322l-111.355 64.296z"
-    />
-    <path
-      fill="#FEC950"
-      d="m248.581 362.02 3.291 1.9-111.36 64.288-3.29-1.9z"
-    />
-    <path
-      fill="#FEC950"
-      d="m137.224 420.988 3.29 1.9.001 5.322-3.29-1.9zM140.516 422.89l111.355-64.296v5.322l-111.355 64.296z"
-    />
-    <path
-      fill="#000"
-      fillOpacity={0.1}
-      d="m140.516 422.89 111.355-64.296v5.322l-111.355 64.296z"
-    />
-    <path
-      fill="#FEC950"
-      d="M137.224 420.988 248.583 356.7l3.291 1.9-111.359 64.288z"
-    />
-    <path
-      fill="#fff"
-      fillOpacity={0.3}
-      d="M137.224 420.988 248.583 356.7l3.291 1.9-111.359 64.288z"
-    />
-    <path fill="#F04D21" d="m353.358 335.975 19.76 11.41v8.112l-19.76-11.41z" />
-    <path
-      fill="#F04D21"
-      d="m344.577 341.045 52.7-30.428-.001 8.112-52.7 30.428z"
-    />
-    <path
-      fill="#F04D21"
-      d="m397.28 318.728 19.761 11.408-52.7 30.425-19.762-11.408z"
-    />
-    <path fill="#F04D21" d="m344.577 341.041 19.76 11.41v8.112l-19.76-11.41z" />
-    <path
-      fill="#F04D21"
-      d="m344.577 341.041 19.76 11.41v8.112l-19.76-11.41zM364.338 352.45l52.7-30.428-.001 8.112-52.7 30.428z"
-    />
-    <path
-      fill="#000"
-      fillOpacity={0.1}
-      d="m364.338 352.45 52.7-30.428-.001 8.112-52.7 30.428z"
-    />
-    <path
-      fill="#F04D21"
-      d="m344.577 341.044 52.701-30.425 19.762 11.409-52.702 30.424z"
-    />
-    <path
-      fill="#fff"
-      fillOpacity={0.3}
-      d="m344.577 341.044 52.701-30.425 19.762 11.409-52.702 30.424z"
-    />
-    <path fill="#F04D21" d="m353.358 323.363 19.76 11.41v8.112l-19.76-11.41z" />
-    <path
-      fill="#F04D21"
-      d="m344.577 328.433 52.7-30.428-.001 8.112-52.7 30.428z"
-    />
-    <path
-      fill="#F04D21"
-      d="m397.279 306.116 19.761 11.408-52.7 30.425-19.762-11.408z"
-    />
-    <path fill="#F04D21" d="m344.577 328.428 19.76 11.41v8.112l-19.76-11.41z" />
-    <path
-      fill="#F04D21"
-      d="m344.577 328.428 19.76 11.41v8.112l-19.76-11.41zM364.338 339.838l52.7-30.428-.001 8.112-52.7 30.428z"
-    />
-    <path
-      fill="#000"
-      fillOpacity={0.1}
-      d="m364.338 339.838 52.7-30.428-.001 8.112-52.7 30.428z"
-    />
-    <path
-      fill="#F04D21"
-      d="m344.577 328.432 52.701-30.425 19.762 11.409-52.702 30.424z"
-    />
-    <path
-      fill="#fff"
-      fillOpacity={0.3}
-      d="m344.577 328.432 52.701-30.425 19.762 11.409-52.702 30.424z"
-    />
-    <path fill="#F04D21" d="m353.358 310.75 19.76 11.41v8.112l-19.76-11.41z" />
-    <path
-      fill="#F04D21"
-      d="m344.577 315.821 52.7-30.428-.001 8.112-52.7 30.428z"
-    />
-    <path
-      fill="#F04D21"
-      d="m397.279 293.504 19.761 11.408-52.7 30.425-19.762-11.408z"
-    />
-    <path fill="#F04D21" d="m344.577 315.816 19.76 11.41v8.112l-19.76-11.41z" />
-    <path
-      fill="#F04D21"
-      d="m344.577 315.816 19.76 11.41v8.112l-19.76-11.41zM364.338 327.225l52.7-30.428-.001 8.112-52.7 30.428z"
-    />
-    <path
-      fill="#000"
-      fillOpacity={0.1}
-      d="m364.338 327.225 52.7-30.428-.001 8.112-52.7 30.428z"
-    />
-    <path
-      fill="#F04D21"
-      d="m344.577 315.82 52.701-30.425 19.762 11.409-52.702 30.424z"
-    />
-    <path
-      fill="#fff"
-      fillOpacity={0.3}
-      d="m344.577 315.82 52.701-30.425 19.762 11.409-52.702 30.424z"
-    />
-    <path
-      fill="#8FD8F7"
-      d="m221.85 356.393 3.29 1.9.001 5.322-3.29-1.9zM108.762 421.687l113.087-65.296v5.322L108.762 427.01z"
-    />
-    <path
-      fill="#8FD8F7"
-      d="m221.85 361.713 3.291 1.9L112.05 428.9l-3.291-1.9z"
-    />
-    <path
-      fill="#8FD8F7"
-      d="m108.761 421.681 3.29 1.9.001 5.322-3.29-1.9zM112.053 423.583l113.087-65.296v5.322l-113.087 65.296z"
-    />
-    <path
-      fill="#000"
-      fillOpacity={0.1}
-      d="m112.053 423.583 113.087-65.296v5.322l-113.087 65.296z"
-    />
-    <path
-      fill="#8FD8F7"
-      d="m108.761 421.684 113.091-65.288 3.291 1.9-113.091 65.288z"
-    />
-    <path
-      fill="#fff"
-      fillOpacity={0.3}
-      d="m108.761 421.684 113.091-65.288 3.291 1.9-113.091 65.288z"
-    />
-    <path
-      fill="#F04D21"
-      d="m206.902 229.086 20.28 11.71.002 41.436-20.28-11.71z"
-    />
-    <path
-      fill="#F04D21"
-      d="m163.218 254.311 43.686-25.224-.001 41.436-43.686 25.224z"
-    />
-    <path
-      fill="#F04D21"
-      d="m206.902 270.52 20.28 11.708-43.686 25.221-20.281-11.708z"
-    />
-    <path
-      fill="#F04D21"
-      d="m163.215 254.302 20.28 11.71.002 41.436-20.28-11.71z"
-    />
-    <path
-      fill="#F04D21"
-      d="m183.497 266.013 43.686-25.224-.001 41.436-43.686 25.224z"
-    />
-    <path
-      fill="#F04D21"
-      d="m163.215 254.307 43.687-25.221 20.281 11.708-43.687 25.221z"
-    />
-    <path
-      fill="#fff"
-      fillOpacity={0.3}
-      d="m163.215 254.307 43.687-25.221 20.281 11.708-43.687 25.221z"
-    />
-    <path fill="#F04D21" d="m201.568 217.86 20.28 11.71v8.436l-20.28-11.71z" />
-    <path
-      fill="#F04D21"
-      d="m158.75 242.585 42.82-24.724v8.436l-42.82 24.724z"
-    />
-    <path
-      fill="#F04D21"
-      d="m201.568 226.294 20.28 11.708-42.82 24.721-20.281-11.708z"
-    />
-    <path
-      fill="#F04D21"
-      d="m158.747 242.577 20.28 11.71v8.436l-20.28-11.71zM179.029 254.288l42.82-24.724V238l-42.82 24.724z"
-    />
-    <path
-      fill="#000"
-      fillOpacity={0.1}
-      d="m179.029 254.288 42.82-24.724V238l-42.82 24.724z"
-    />
-    <path
-      fill="#F04D21"
-      d="m158.747 242.581 42.821-24.721 20.281 11.708-42.821 24.721z"
-    />
-    <path
-      fill="#fff"
-      fillOpacity={0.3}
-      d="m158.747 242.581 42.821-24.721 20.281 11.708-42.821 24.721z"
-    />
-    <path
-      fill="#FEC950"
-      d="m413.673 217.862 12.648 7.303.001 31.32-12.648-7.302z"
-    />
-    <path
-      fill="#FEC950"
-      d="m413.673 249.182 12.649 7.302-30.218 17.445-12.649-7.302z"
-    />
-    <path
-      d="m413.668 217.86 12.648 7.302-30.213 48.763-12.647-7.299 30.212-48.766Z"
-      fill="#FEC950"
-    />
-    <path
-      d="m408.047 254.331 18.274-29.17-.001 31.321-30.217 17.447 11.944-19.598Z"
-      fill="#FEC950"
-    />
-    <path
-      d="m408.047 254.331 18.274-29.17-.001 31.321-30.217 17.447 11.944-19.598Z"
-      fill="#000"
-      fillOpacity={0.1}
-    />
-    <path
-      fill="#FEC950"
-      d="m136.445 244.703 41.72 24.089.002 69.996-41.72-24.089z"
-    />
-    <path
-      fill="#FEC950"
-      d="m117.845 255.442 18.601-10.74-.002 69.996-18.601 10.74z"
-    />
-    <path
-      fill="#FEC950"
-      d="m136.446 314.697 41.722 24.086-18.602 10.739-41.722-24.086z"
-    />
-    <path
-      fill="#FEC950"
-      d="m117.844 255.437 41.72 24.089.002 69.996-41.72-24.089z"
-    />
-    <path
-      fill="#FEC950"
-      d="m159.564 279.525 18.601-10.74-.002 69.996-18.601 10.74z"
-    />
-    <path
-      fill="#000"
-      fillOpacity={0.1}
-      d="m159.564 279.525 18.601-10.74-.002 69.996-18.601 10.74z"
-    />
-    <path
-      fill="#FEC950"
-      d="m117.844 255.44 18.602-10.739 41.721 24.086-18.601 10.74z"
-    />
-    <path
-      fill="#fff"
-      fillOpacity={0.3}
-      d="m117.844 255.44 18.602-10.739 41.721 24.086-18.601 10.74z"
-    />
-    <path
-      fill="#FEC950"
-      d="m125.641 297.314 47.711 27.548.001 33.53-47.71-27.548zM113.366 304.401l12.275-7.087-.001 33.53-12.275 7.087z"
-    />
-    <path
-      fill="#FEC950"
-      d="m125.642 330.842 47.713 27.545-12.275 7.087-47.713-27.545z"
-    />
-    <path
-      fill="#FEC950"
-      d="m113.365 304.398 47.711 27.548.001 33.53-47.71-27.548zM161.078 331.946l12.275-7.087-.001 33.53-12.275 7.087z"
-    />
-    <path
-      fill="#000"
-      fillOpacity={0.1}
-      d="m161.078 331.946 12.275-7.087-.001 33.53-12.275 7.087z"
-    />
-    <path
-      fill="#FEC950"
-      d="m113.365 304.4 12.275-7.087 47.713 27.545-12.275 7.087z"
-    />
-    <path
-      fill="#fff"
-      fillOpacity={0.3}
-      d="m113.365 304.4 12.275-7.087 47.713 27.545-12.275 7.087z"
-    />
-    <path
-      fill="#F04D21"
-      d="m312.366 366.803 5.024 2.9v5.323l-5.024-2.901zM246.954 404.569l65.41-37.768v5.322l-65.41 37.768z"
-    />
-    <path
-      fill="#F04D21"
-      d="m312.366 372.123 5.024 2.9-65.413 37.764-5.024-2.9z"
-    />
-    <path
-      fill="#000"
-      fillOpacity={0.1}
-      d="m312.365 385.446 5.024 2.9-65.413 37.764-5.024-2.9z"
-    />
-    <path
-      fill="#F04D21"
-      d="m246.953 404.564 5.024 2.9v5.323l-5.024-2.901zM251.977 407.464l65.41-37.768v5.322l-65.41 37.768z"
-    />
-    <path
-      fill="#000"
-      fillOpacity={0.1}
-      d="m251.977 407.464 65.41-37.768v5.322l-65.41 37.768z"
-    />
-    <path
-      fill="#F04D21"
-      d="m246.953 404.567 65.413-37.763 5.024 2.9-65.413 37.763z"
-    />
-    <path
-      fill="#fff"
-      fillOpacity={0.3}
-      d="m246.953 404.567 65.413-37.763 5.024 2.9-65.413 37.763z"
-    />
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M229.899 321.983c0 6.242 3.969 12.485 11.908 17.247 15.876 9.526 41.616 9.526 57.492 0 7.938-4.762 11.907-11.005 11.907-17.247v-24.392c0-6.243-3.969-12.485-11.907-17.248-15.876-9.526-41.616-9.526-57.492 0-7.939 4.763-11.908 11.005-11.908 17.248v24.392Z"
-      fill="#8FD8F7"
-    />
-    <circle
-      r={21.626}
-      transform="scale(1.22477 .70707) rotate(-45 617.935 -56.444)"
-      fill="#8FD8F7"
-    />
-    <circle
-      r={30.894}
-      transform="scale(1.22477 .70707) rotate(-45 617.099 -56.79)"
-      fill="#fff"
-      fillOpacity={0.3}
-    />
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M232.648 292.943c0 5.821 3.701 11.641 11.103 16.082 14.802 8.882 38.803 8.882 53.605 0 7.402-4.441 11.103-10.261 11.103-16.082V270.2c0-5.82-3.701-11.64-11.103-16.081-14.802-8.882-38.803-8.882-53.605 0-7.402 4.441-11.103 10.261-11.103 16.081v22.743Z"
-      fill="#8FD8F7"
-    />
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M232.648 292.943c0 5.821 3.701 11.641 11.103 16.082 14.802 8.882 38.803 8.882 53.605 0 7.402-4.441 11.103-10.261 11.103-16.082V270.2c0-5.82-3.701-11.64-11.103-16.081-14.802-8.882-38.803-8.882-53.605 0-7.402 4.441-11.103 10.261-11.103 16.081v22.743Z"
-      fill="url(#g)"
-      fillOpacity={0.1}
-    />
-    <circle
-      r={20.164}
-      transform="scale(1.22477 .70707) rotate(-45 571.214 -75.796)"
-      fill="#8FD8F7"
-    />
-    <circle
-      r={28.805}
-      transform="scale(1.22477 .70707) rotate(-45 570.433 -76.121)"
-      fill="#8FD8F7"
-    />
-    <circle
-      r={28.805}
-      transform="scale(1.22477 .70707) rotate(-45 570.433 -76.121)"
-      fill="#fff"
-      fillOpacity={0.3}
-    />
-    <defs>
-      <linearGradient
-        id="a"
-        x1={262.005}
-        y1={438.665}
-        x2={262.005}
-        y2={111.665}
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop stopColor="#fff" />
-        <stop offset={1} stopColor="#fff" stopOpacity={0} />
-      </linearGradient>
-      <linearGradient
-        id="d"
-        x1={0}
-        y1={0}
-        x2={63.386}
-        y2={126.78}
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop stopOpacity={0.12} />
-        <stop offset={1} stopColor="#fff" stopOpacity={0} />
-      </linearGradient>
-      <linearGradient
-        id="e"
-        x1={225.616}
-        y1={225.616}
-        x2={157.249}
-        y2={88.875}
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop />
-        <stop offset={1} stopOpacity={0} />
-      </linearGradient>
-      <linearGradient
-        id="g"
-        x1={319.79}
-        y1={315.686}
-        x2={270.553}
-        y2={315.686}
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop />
-        <stop offset={1} stopOpacity={0} />
-      </linearGradient>
-      <radialGradient
-        id="b"
-        cx={0}
-        cy={0}
-        r={1}
-        gradientUnits="userSpaceOnUse"
-        gradientTransform="matrix(0 167.085 -197.629 0 262.002 364.25)"
-      >
-        <stop stopColor="#C4C4C4" />
-        <stop offset={1} stopColor="#C4C4C4" stopOpacity={0} />
-      </radialGradient>
-      <radialGradient
-        id="f"
-        cx={0}
-        cy={0}
-        r={1}
-        gradientUnits="userSpaceOnUse"
-        gradientTransform="matrix(0 234.911 -197.636 0 262.003 235.576)"
-      >
-        <stop stopColor="#C4C4C4" />
-        <stop offset={1} stopColor="#C4C4C4" stopOpacity={0} />
-      </radialGradient>
-      <filter
-        id="c"
-        x={0.368}
-        y={178.282}
-        width={523.27}
-        height={356.192}
-        filterUnits="userSpaceOnUse"
-        colorInterpolationFilters="sRGB"
-      >
-        <feFlood floodOpacity={0} result="BackgroundImageFix" />
-        <feColorMatrix
-          in="SourceAlpha"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          result="hardAlpha"
-        />
-        <feOffset />
-        <feGaussianBlur stdDeviation={32} />
-        <feComposite in2="hardAlpha" operator="out" />
-        <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" />
-        <feBlend
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow_4431_23256"
-        />
-        <feBlend
-          in="SourceGraphic"
-          in2="effect1_dropShadow_4431_23256"
-          result="shape"
-        />
-      </filter>
-    </defs>
-  </svg>
+const strong = (props: Props) => (
+  <strong {...props} className={`${props.className} text-fmd-red`} />
 );
 
 export const formidable: DeckTheme = {
   card,
-  nodes: {},
+  nodes: {
+    strong,
+  },
   head: (
     <React.Fragment>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
