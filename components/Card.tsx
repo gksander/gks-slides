@@ -3,14 +3,14 @@ import { Props } from "./types";
 import { useSlideSize } from "./DeckWrapper";
 import { toBlob } from "html-to-image";
 
-export const Section = ({
+export const Card = ({
   children,
-  numSlides,
+  numCards,
   i,
   fontSize,
   codeFontSize,
 }: Props & {
-  numSlides: number;
+  numCards: number;
   i: number;
   fontSize?: string;
   codeFontSize?: string;
@@ -120,7 +120,7 @@ export const Section = ({
                 isPrintingOrCapturing && "invisible"
               }`}
             >
-              {+i + 1} of {numSlides}
+              {+i + 1} of {numCards}
             </div>
             <div className="pb-3 text-xs text-center font-bold tracking-wide">
               @gksander

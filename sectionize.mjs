@@ -3,54 +3,70 @@ import { remove } from "unist-util-remove";
 
 export const sectionize = () => {
   return (tree) => {
-    let sections = [],
+    let cards = [],
       sectionItems = [];
 
     for (const node of tree.children) {
       if (node.type === "thematicBreak") {
-        sections.push([...sectionItems]);
+        cards.push([...sectionItems]);
         sectionItems.length = 0;
       } else {
         sectionItems.push(node);
       }
     }
-    sections.push([...sectionItems]);
+    if (sectionItems.length > 0) cards.push([...sectionItems]);
 
     /**
-     * Turn sections children-array into actual `section` items
+     * Turn cards children-array into actual `section` items
      */
-    sections = sections.map((items, i) => ({
-      type: "section",
+    cards = cards.map((items, i) => ({
+      type: "card",
       children: items,
       data: {
-        hName: "section",
-        // pass through number of sections and current index
-        hProperties: { numSlides: sections.length, i },
+        hName: "card",
+        // pass through number of cards and current index
+        hProperties: { numCards: cards.length, i },
       },
     }));
 
     /**
-     * Now, we'll also pluck out any JSON-parsable text items and pass those
-     *  to the section component.
-     * This is a poor-man's way of adding metadata to a slide.
+     * Search for any ::config directives in each card and pass those props
+     *  on to the Card component
      */
-    sections.forEach((section) => {
+    cards.forEach((card) => {
       visit(
-        section,
+        card,
         (node) => {
-          if (node.type !== "text") return false;
-          try {
-            Object.assign(section.data.hProperties, JSON.parse(node.value));
+          if (node.data?.hName === "config") {
+            Object.assign(card.data.hProperties, node.data.hProperties);
             return true;
-          } catch {}
-          return false;
+          }
         },
-        (item) => {
-          remove(section, { cascade: true }, (i) => i === item);
+        (node) => {
+          remove(card, { cascade: true }, (i) => i === node);
         }
       );
     });
 
-    tree.children = sections;
+    /**
+     * Build out our deck component. We'll collect deck props to pass in to the deck
+     */
+    const deckProps = {};
+    visit(tree, (node) => {
+      if (node.data?.hName === "deckConfig" && node.data?.hProperties) {
+        Object.assign(deckProps, node.data.hProperties);
+      }
+    });
+
+    const deck = {
+      type: "deck",
+      children: cards,
+      data: {
+        hName: "deck",
+        hProperties: deckProps,
+      },
+    };
+
+    tree.children = [deck];
   };
 };

@@ -3,7 +3,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { MDXProvider } from "@mdx-js/react";
 import { DeckWrapper } from "../components/DeckWrapper";
-import { Section } from "../components/Section";
+import { Card } from "../components/Card";
 import { H1 } from "../components/h1";
 import { H2 } from "../components/h2";
 import { H3 } from "../components/h3";
@@ -15,8 +15,10 @@ import { Li } from "../components/li";
 import { Strong } from "../components/strong";
 import { Img } from "../components/img";
 import { A } from "../components/a";
+import { Deck } from "../components/Deck";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  console.log(Component);
   return (
     <>
       <link
@@ -38,10 +40,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         crossOrigin="anonymous"
       />
       <DeckWrapper>
-        <MDXProvider
+        <Component
+          {...pageProps}
           components={{
-            // @ts-ignore
-            section: Section,
+            card: Card,
             h1: H1,
             h2: H2,
             h3: H3,
@@ -53,13 +55,28 @@ function MyApp({ Component, pageProps }: AppProps) {
             strong: Strong,
             img: Img,
             a: A,
+            directive: ({
+              componentName,
+              ...rest
+            }: React.PropsWithChildren<{ componentName: string }>) => {
+              const Component =
+                // @ts-ignore
+                ComponentMap[componentName] || ComponentMap.noop;
+              return <Component {...rest} />;
+            },
           }}
-        >
-          <Component {...pageProps} />
-        </MDXProvider>
+        />
       </DeckWrapper>
     </>
   );
 }
+
+const ComponentMap = {
+  "side-by-side": (props: any) => <div className="flex">{props.children}</div>,
+  left: (props: any) => <div>{props.children}</div>,
+  right: (props: any) => <div>{props.children}</div>,
+  tip: () => <div>HERES A TIP</div>,
+  noop: () => null,
+};
 
 export default MyApp;

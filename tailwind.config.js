@@ -13,8 +13,6 @@ for (const key in fontSize) {
   ];
 }
 
-console.log(fontSize);
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
