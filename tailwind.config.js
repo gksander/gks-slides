@@ -12,6 +12,13 @@ for (const key in fontSize) {
     { lineHeight: replaceRem(val[1].lineHeight) },
   ];
 }
+// Do the same for spacing?
+const defaultSpacing = defaultConfig.theme.spacing;
+const spacingKeysToGrab = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
+const slideSpacing = spacingKeysToGrab.reduce((acc, key) => {
+  acc[`slide-${key}`] = replaceRem(defaultSpacing[key]);
+  return acc;
+}, {});
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -21,6 +28,7 @@ module.exports = {
       colors: {
         primary: colors.amber,
       },
+      spacing: slideSpacing,
     },
     fontSize,
   },

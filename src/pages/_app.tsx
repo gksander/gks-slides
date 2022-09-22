@@ -1,21 +1,6 @@
 import * as React from "react";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { MDXProvider } from "@mdx-js/react";
-import { DeckWrapper } from "../components/DeckWrapper";
-import { Card } from "../components/Card";
-import { H1 } from "../components/h1";
-import { H2 } from "../components/h2";
-import { H3 } from "../components/h3";
-import { Pre } from "../components/pre";
-import { P } from "../components/p";
-import { Ol } from "../components/ol";
-import { Ul } from "../components/ul";
-import { Li } from "../components/li";
-import { Strong } from "../components/strong";
-import { Img } from "../components/img";
-import { A } from "../components/a";
-import { Deck } from "../components/Deck";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

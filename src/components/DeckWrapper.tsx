@@ -1,8 +1,19 @@
 import * as React from "react";
 
-type DeckWrapperProps = React.PropsWithChildren<{}>;
+type DeckWrapperProps = React.PropsWithChildren<{
+  width: string;
+  height: string;
+  fontSize: string;
+  codeFontSize: string;
+}>;
 
-export const DeckWrapper = ({ children }: DeckWrapperProps) => {
+export const DeckWrapper = ({
+  children,
+  width,
+  height,
+  fontSize,
+  codeFontSize,
+}: DeckWrapperProps) => {
   const offscreenSlideRef = React.useRef<HTMLDivElement>(null);
   const mainRef = React.useRef<HTMLDivElement>(null);
   const [slideWidth, setSlideWidth] = React.useState(0);
@@ -71,12 +82,23 @@ export const DeckWrapper = ({ children }: DeckWrapperProps) => {
         className={
           isPrinting
             ? ""
-            : "bg-stone-500 snap-y snap-mandatory h-screen w-screen overflow-scroll"
+            : "bg-stone-500 snap-y snap-mandatory h-screen w-screen overflow-y-scroll"
         }
+        style={{
+          // @ts-ignore
+          "--slide-font-size": fontSize || "inherit",
+          "--code-font-size": codeFontSize || "inherit",
+        }}
         ref={mainRef}
       >
         <div
-          className="fixed w-[8.5in] h-[8.5in] -top-[10in] -left[10in] -z-1 opacity-0"
+          className="fixed -z-1 opacity-0"
+          style={{
+            width,
+            height,
+            top: `calc(-2 * ${height})`,
+            left: `calc(-2 * ${width})`,
+          }}
           ref={offscreenSlideRef}
         ></div>
         {children}
