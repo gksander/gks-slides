@@ -18,14 +18,14 @@ export const DeckWrapper = ({
 }: DeckWrapperProps) => {
   const offscreenSlideRef = React.useRef<HTMLDivElement>(null);
   const mainRef = React.useRef<HTMLDivElement>(null);
-  const [slideWidth, setSlideWidth] = React.useState(0);
-  const [slideHeight, setSlideHeight] = React.useState(0);
+  const [cardWidth, setCardWidth] = React.useState(0);
+  const [cardHeight, setCardHeight] = React.useState(0);
   const [isPrinting, setIsPrinting] = React.useState(false);
 
   const measure = React.useCallback(() => {
     if (!offscreenSlideRef.current) return;
-    setSlideWidth(offscreenSlideRef.current.clientWidth);
-    setSlideHeight(offscreenSlideRef.current.clientHeight);
+    setCardWidth(offscreenSlideRef.current.clientWidth);
+    setCardHeight(offscreenSlideRef.current.clientHeight);
   }, []);
 
   React.useEffect(() => {
@@ -74,8 +74,8 @@ export const DeckWrapper = ({
   }, []);
 
   const value = React.useMemo(
-    () => ({ slideWidth, slideHeight, isPrinting }),
-    [slideWidth, slideHeight, isPrinting]
+    () => ({ cardWidth, cardHeight, isPrinting }),
+    [cardWidth, cardHeight, isPrinting]
   );
 
   return (
@@ -111,9 +111,9 @@ export const DeckWrapper = ({
 };
 
 const DeckContext = React.createContext({
-  slideWidth: 0,
-  slideHeight: 0,
+  cardWidth: 0,
+  cardHeight: 0,
   isPrinting: false,
 });
 
-export const useSlideSize = () => React.useContext(DeckContext);
+export const useCardSize = () => React.useContext(DeckContext);

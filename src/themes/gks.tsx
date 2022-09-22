@@ -27,25 +27,25 @@ const card = (props: CardProps) => {
           {/* headshot/signature in background */}
           <div className="absolute bottom-0 inset-x-0 flex justify-between items-end">
             <div
-              className={`p-3 text-sm font-bold ${
+              className={`p-slide-3 text-sm font-bold ${
                 isPrintingOrCapturing && "invisible"
               }`}
             >
               {+i + 1} of {numCards}
             </div>
-            <div className="pb-3 text-xs text-center font-bold tracking-wide">
+            <div className="pb-slide-3 text-xs text-center font-bold tracking-wide">
               @gksander
             </div>
             <div className="flex justify-end">
               <div
                 style={{ backgroundImage: "url(/img/headshot-bw.png)" }}
-                className="bg-contain bg-bottom bg-no-repeat w-20 h-20"
+                className="bg-contain bg-bottom bg-no-repeat w-slide-20 h-slide-20"
               ></div>
             </div>
           </div>
 
           {/* Actual content */}
-          <div className="absolute inset-0 z-10 p-4 overflow-hidden">
+          <div className="absolute inset-0 z-10 p-slide-4 overflow-hidden">
             {children}
           </div>
         </React.Fragment>

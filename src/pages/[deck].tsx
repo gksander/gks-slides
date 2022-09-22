@@ -29,7 +29,7 @@ export default function Deck({
   theme = "gks",
   width = "8.5in",
   height = "8.5in",
-  fontSize = "0.24in",
+  fontSize = "0.2in",
   codeFontSize = fontSize,
 }: {
   code: string;
@@ -44,6 +44,7 @@ export default function Deck({
 
   return (
     <React.Fragment>
+      {activeTheme.head}
       <DeckWrapper
         width={width}
         height={height}
@@ -74,7 +75,6 @@ export default function Deck({
           }}
         />
       </DeckWrapper>
-      {activeTheme.head && <Head>{activeTheme.head}</Head>}
     </React.Fragment>
   );
 }

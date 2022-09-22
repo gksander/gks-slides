@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useSlideSize } from "../../components/DeckWrapper";
+import { useCardSize } from "../../components/DeckWrapper";
 import { toBlob } from "html-to-image";
 import { Props } from "../themeTypes";
 
@@ -27,9 +27,11 @@ export const BaseCard = ({
     i: number;
     numCards: number;
     children: React.ReactNode;
+    cardWidth: number;
+    cardHeight: number;
   }) => React.ReactNode;
 }) => {
-  const { slideWidth, slideHeight, isPrinting } = useSlideSize();
+  const { cardWidth, cardHeight, isPrinting } = useCardSize();
   const containerRef = React.useRef<HTMLDivElement>(null);
   const slideRef = React.useRef<HTMLDivElement>(null);
   const [scale, setScale] = React.useState(0);
@@ -39,27 +41,27 @@ export const BaseCard = ({
   const isPrintingOrCapturing = isPrinting || isCapturingSlide;
 
   const measure = React.useCallback(() => {
-    if (!containerRef.current || !slideWidth || !slideHeight) return;
+    if (!containerRef.current || !cardWidth || !cardHeight) return;
     const { clientWidth: width, clientHeight: height } = containerRef.current;
 
     let scale,
       left = 0,
       top = 0;
     // Fill height
-    if ((slideHeight / slideWidth) * width > height) {
-      scale = height / slideHeight;
-      left = (width - scale * slideWidth) / 2;
+    if ((cardHeight / cardWidth) * width > height) {
+      scale = height / cardHeight;
+      left = (width - scale * cardWidth) / 2;
     }
     // Else, fill width
     else {
-      scale = width / slideWidth;
-      top = (height - scale * slideHeight) / 2;
+      scale = width / cardWidth;
+      top = (height - scale * cardHeight) / 2;
     }
 
     setScale(scale);
     setLeft(left);
     setTop(top);
-  }, [slideWidth, slideHeight]);
+  }, [cardWidth, cardHeight]);
 
   const captureSlide = React.useCallback(async () => {
     if (!slideRef.current) return;
@@ -67,7 +69,14 @@ export const BaseCard = ({
     setIsCapturingSlide(true);
     await wait(500);
 
-    const blob = await toBlob(slideRef.current);
+    const OUT_WIDTH = 2000;
+
+    console.log(cardWidth, cardHeight);
+
+    const blob = await toBlob(slideRef.current, {
+      canvasWidth: OUT_WIDTH,
+      canvasHeight: (cardHeight / cardWidth) * OUT_WIDTH,
+    });
     if (blob) {
       await navigator.clipboard.write([
         new ClipboardItem({
@@ -77,7 +86,7 @@ export const BaseCard = ({
     }
 
     setIsCapturingSlide(false);
-  }, []);
+  }, [cardWidth, cardHeight]);
 
   React.useEffect(() => {
     measure();
@@ -100,8 +109,14 @@ export const BaseCard = ({
         {/* This is the actual Section slide/card */}
         <div
           ref={slideRef}
-          className="break-after-page transform-none text-gray-100 relative slide shadow-xl print:shadow-none"
+          className="break-after-page transform-none text-gray-100 relative slide shadow-xl print:shadow-none text-base"
           style={{
+            // width: isCapturingSlide
+            //   ? `calc(${CAPTURE_SCALE} * ${width})`
+            //   : width,
+            // height: isCapturingSlide
+            //   ? `calc(${CAPTURE_SCALE} * ${height})`
+            //   : height,
             width,
             height,
             transform: !isPrintingOrCapturing
@@ -113,11 +128,20 @@ export const BaseCard = ({
             if (e.metaKey) captureSlide();
           }}
         >
-          {renderContents({ isPrintingOrCapturing, i, numCards, children })}
+          {renderContents({
+            isPrintingOrCapturing,
+            i,
+            numCards,
+            children,
+            cardWidth,
+            cardHeight,
+          })}
         </div>
       </div>
     </section>
   );
 };
+
+const CAPTURE_SCALE = 2;
 
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));

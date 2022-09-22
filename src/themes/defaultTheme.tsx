@@ -2,15 +2,21 @@ import { DeckTheme, Props } from "./themeTypes";
 import * as React from "react";
 
 const h1 = ({ children }: Props) => (
-  <h1 className="text-4xl font-medium mb-slide-2 leading-[3rem]">{children}</h1>
+  <h1 className="text-4xl font-medium mb-slide-4">{children}</h1>
 );
 
 const h2 = (props: Props) => (
-  <h2 {...props} className={`${props.className} text-2xl font-medium mb-5`} />
+  <h2
+    {...props}
+    className={`${props.className} text-2xl font-medium mb-slide-5`}
+  />
 );
 
 const h3 = (props: Props) => (
-  <h3 {...props} className={`${props.className} text-xl font-medium mb-5`} />
+  <h3
+    {...props}
+    className={`${props.className} text-xl font-medium mb-slide-5`}
+  />
 );
 
 const img = (props: Props & { src?: string }) => {
@@ -35,15 +41,21 @@ const a = (props: Props) => {
 };
 
 const ol = (props: Props) => (
-  <ol {...props} className={`${props.className} mb-4 list-decimal ml-6`} />
+  <ol
+    {...props}
+    className={`${props.className} mb-slide-4 list-decimal ml-slide-6`}
+  />
 );
 
 const ul = (props: Props) => (
-  <ul {...props} className={`${props.className} mb-4 list-disc ml-6`} />
+  <ul
+    {...props}
+    className={`${props.className} mb-slide-4 list-disc ml-slide-6`}
+  />
 );
 
 const li = (props: Props) => (
-  <li {...props} className={`${props.className} mb-2`} />
+  <li {...props} className={`${props.className} mb-slide-2`} />
 );
 
 const strong = (props: Props) => (
@@ -54,7 +66,7 @@ const strong = (props: Props) => (
 const pre = (props: Props) => {
   return (
     <div
-      className="rounded-lg print:overflow-hidden border-2 mb-5 code-block"
+      className="rounded-lg print:overflow-hidden border-2 mb-slide-5 code-block"
       // style={props.style}
     >
       <div className="p-2 flex gap-2">
@@ -68,7 +80,7 @@ const pre = (props: Props) => {
 };
 
 const p = (props: Props) => (
-  <p {...props} className={`${props.className} mb-4`} />
+  <p {...props} className={`${props.className} mb-slide-4`} />
 );
 
 export const defaultTheme: Omit<DeckTheme, "card"> = {

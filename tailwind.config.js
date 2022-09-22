@@ -14,7 +14,20 @@ for (const key in fontSize) {
 }
 // Do the same for spacing?
 const defaultSpacing = defaultConfig.theme.spacing;
-const spacingKeysToGrab = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
+const spacingKeysToGrab = [
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "20",
+  "24",
+  "32",
+];
 const slideSpacing = spacingKeysToGrab.reduce((acc, key) => {
   acc[`slide-${key}`] = replaceRem(defaultSpacing[key]);
   return acc;
@@ -27,6 +40,16 @@ module.exports = {
     extend: {
       colors: {
         primary: colors.amber,
+        fmd: {
+          red: "#F04D21",
+          navy: "#1E2852",
+          blue: "#EBE5DA",
+          white: "#FFFFFF",
+          yellow: "#FFC951",
+          sky: "#8BDDFD",
+          gray: "#EBE5DA",
+          cloud50: "#D9D9D9",
+        },
       },
       spacing: slideSpacing,
     },

@@ -1,7 +1,19 @@
 ---
-theme: gks
+theme: formidable
 width: 8.5in
 height: 6in
+---
+
+# Hello
+
+- one
+- two
+
+and content
+
+1. one
+2. two
+
 ---
 
 # Hello world!
