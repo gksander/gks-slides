@@ -71,19 +71,21 @@ export const BaseCard = ({
     setIsCapturingSlide(true);
     await wait(500);
 
-    const OUT_WIDTH = 1000;
+    try {
+      const OUT_WIDTH = 2000;
 
-    const blob = await toBlob(slideRef.current, {
-      canvasWidth: OUT_WIDTH,
-      canvasHeight: (cardHeight / cardWidth) * OUT_WIDTH,
-    });
-    if (blob) {
-      await navigator.clipboard.write([
-        new ClipboardItem({
-          "image/png": blob,
-        }),
-      ]);
-    }
+      const blob = await toBlob(slideRef.current, {
+        canvasWidth: OUT_WIDTH,
+        canvasHeight: (cardHeight / cardWidth) * OUT_WIDTH,
+      });
+      if (blob) {
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            "image/png": blob,
+          }),
+        ]);
+      }
+    } catch {}
 
     setIsCapturingSlide(false);
   }, [cardWidth, cardHeight]);

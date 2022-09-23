@@ -1,9 +1,23 @@
-import { DeckTheme, Props } from "./themeTypes";
+import { DeckTheme, GenericComponent, Props } from "./themeTypes";
 import * as React from "react";
+import clsx from "clsx";
 
-const h1 = ({ children }: Props) => (
-  <h1 className="text-4xl font-medium mb-slide-4">{children}</h1>
-);
+const h1 = ({
+  children,
+  align = "left",
+}: Props & { align?: "center" | "left" | "right" }) => {
+  return (
+    <h1
+      className={clsx("text-4xl font-medium mb-slide-4", {
+        "text-left": align === "left",
+        "text-center": align === "center",
+        "text-right": align === "right",
+      })}
+    >
+      {children}
+    </h1>
+  );
+};
 
 const h2 = (props: Props) => (
   <h2
@@ -83,6 +97,55 @@ const p = (props: Props) => (
   <p {...props} className={`${props.className} mb-slide-4`} />
 );
 
+const FancyImg: NonNullable<DeckTheme["directives"]>["img"] = ({
+  src,
+  width,
+  rounded = "medium",
+  shadow = "medium",
+  ...rest
+}) => {
+  return (
+    <div className="mb-slide-5">
+      <img
+        src={src}
+        {...rest}
+        style={{ width }}
+        className={clsx("mx-auto aspect-square object-cover object-center", {
+          "rounded-none": rounded === "none",
+          rounded: rounded === "medium",
+          "rounded-full": rounded === "full",
+          "shadow-none": shadow === "none",
+          shadow: shadow === "medium",
+          "shadow-lg": shadow === "large",
+        })}
+      />
+    </div>
+  );
+};
+
+const columns: GenericComponent = (props) => (
+  <div
+    {...props}
+    className={clsx(props.className, "w-full flex gap-x-slide-5 items-center")}
+  />
+);
+
+const column: NonNullable<DeckTheme["directives"]>["column"] = ({
+  grow,
+  shrink,
+  width,
+  ...rest
+}) => (
+  <div
+    {...rest}
+    className={clsx(rest.className, {
+      "flex-grow": grow === "true",
+      "flex-shrink-0": shrink === "false",
+    })}
+    style={{ width, ...rest.style }}
+  />
+);
+
 export const defaultTheme: Omit<DeckTheme, "card"> = {
   nodes: {
     h1,
@@ -96,5 +159,11 @@ export const defaultTheme: Omit<DeckTheme, "card"> = {
     strong,
     pre,
     p,
+  },
+  directives: {
+    h1,
+    img: FancyImg,
+    columns,
+    column,
   },
 };

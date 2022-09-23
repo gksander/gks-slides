@@ -65,9 +65,12 @@ pre {
 		&:hover .dim { @apply opacity-100; }
 		div.dim { @apply opacity-50; }
 		div.dim, div.highlight { @apply m-0 p-0; }
-		div.line { min-height: 1rem; }
+		div.line { min-height: var(--code-font-size); line-height: 2em; }
 		/** Modify language identifier display */
-		.language-id { @apply absolute bottom-0 right-0 text-xs p-2; }
+		.language-id {
+			@apply absolute bottom-slide-1 right-slide-1 leading-none;
+			font-size: calc(0.9 * var(--code-font-size));
+		}
 	}
 
 	&.twoslash {

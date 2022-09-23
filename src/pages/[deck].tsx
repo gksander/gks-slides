@@ -18,6 +18,7 @@ import { formidable } from "../themes/formidable";
 import { defaultTheme } from "../themes/defaultTheme";
 import { CardProps } from "../themes/util/BaseCard";
 import Head from "next/head";
+import { DeckTheme } from "../themes/themeTypes";
 
 const themes = {
   gks,
@@ -40,7 +41,19 @@ export default function Deck({
   codeFontSize?: string;
 }) {
   const Component = getMDXComponent(code);
-  const activeTheme = themes[theme];
+  const activeTheme: DeckTheme = {
+    ...themes[theme],
+    nodes: {
+      ...defaultTheme.nodes,
+      ...themes[theme].nodes,
+    },
+    directives: {
+      ...defaultTheme.directives,
+      ...themes[theme].directives,
+    },
+  };
+
+  // themes[theme];
 
   return (
     <React.Fragment>
@@ -62,16 +75,22 @@ export default function Deck({
               }),
             ...defaultTheme.nodes,
             ...activeTheme.nodes,
-            directive: () => null,
-            // directive: ({
-            //   componentName,
-            //   ...rest
-            // }: React.PropsWithChildren<{ componentName: string }>) => {
-            //   const Component =
-            //     // @ts-ignore
-            //     ComponentMap[componentName] || ComponentMap.noop;
-            //   return <Component {...rest} />;
-            // },
+            directive: ({
+              componentName,
+              ...rest
+            }: React.PropsWithChildren<{ componentName: string }>) => {
+              if (
+                activeTheme.directives &&
+                componentName in activeTheme.directives
+              ) {
+                return React.createElement(
+                  // @ts-ignore
+                  activeTheme.directives[componentName],
+                  rest
+                );
+              }
+              return null;
+            },
           }}
         />
       </DeckWrapper>
@@ -128,13 +147,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       ];
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),
-        rehypeRaw,
+        [rehypeRaw, { passThrough: ["mdxjsEsm", "mdxJsxFlowElement"] }],
         rehypeKatex,
       ];
 
       return options;
     },
   });
+
+  ctx.res.setHeader("Access-Control-Allow-Origin", "*");
 
   return {
     props: {

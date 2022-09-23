@@ -1,0 +1,92 @@
+---
+theme: formidable
+width: 8.5in
+height: 6in
+codeFontSize: 0.2in
+---
+
+import { VictoryPie } from "victory";
+
+::config{ codeFontSize="0.16in" }
+
+# Victory Charts
+
+Did you know that making charts with **Victory** was *this easy*?
+
+::::columns
+
+:::column{ grow=true }
+```tsx
+import { VictoryPie } from "victory-bar";
+
+const MyComponent = () => (
+  <VictoryPie
+    data={[ { x: "Cats", y: 40 }, /* ... */ ]}
+    colorScale={["gold", "orange", "navy" ]}
+    innerRadius={60}
+    style={{ labels: { fontSize: 25 } }}
+  />
+);
+```
+:::
+
+:::column{ width="2.5in" shrink=false }
+<VictoryPie
+	colorScale={["gold", "orange", "navy" ]}
+	innerRadius={60}
+	style={{ labels: { fontSize: 25 } }}
+	data={[
+		{ x: "Cats", y: 40 },
+		{ x: "Dogs", y: 80 },
+		{ x: "Birds", y: 15 }
+	]}
+/>
+:::
+
+::::
+
+
+---
+
+# Hello it's **Formidable**
+
+::img{ src="https://images.unsplash.com/photo-1661956603025-8310b2e3036d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" width="2in" rounded="full" shadow="large" }
+
+Here's some code.
+
+```ts twoslash
+const x = 13;
+//    ^?
+```
+
+:::h1{.red}
+Hello world
+:::
+
+And here's a formula woohoo
+
+$$
+f(x) = \sin\left(x^2\right)
+$$
+
+---
+
+# Hello world!
+
+$$
+f(x) = x^2
+$$
+
+```ts twoslash
+const getSquareRoot = (x: number, y: number) => Math.sqrt(Math.pow(x, 2));
+```
+
+::tip
+
+---
+
+# Second slide
+
+- One
+- two
+- Three!
