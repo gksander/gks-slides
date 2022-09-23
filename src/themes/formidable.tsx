@@ -8,7 +8,14 @@ const card = (props: CardProps) => {
   return (
     <BaseCard
       {...props}
-      renderContents={({ children, cardWidth, cardHeight }) => (
+      renderContents={({
+        children,
+        cardWidth,
+        cardHeight,
+        i,
+        numCards,
+        isCapturing,
+      }) => (
         <React.Fragment>
           {/* Background */}
           <div className="absolute inset-0 bg-fmd-gray text-fmd-white">
@@ -54,7 +61,7 @@ const card = (props: CardProps) => {
 
                 return (
                   <line
-                    x1={-5 * Math.cos(a + Math.PI)}
+                    x1={5 * Math.cos(a + Math.PI)}
                     y1={down - 5 * Math.sin(a + Math.PI)}
                     x2={len * Math.cos(a)}
                     y2={down - len * Math.sin(a)}
@@ -112,6 +119,16 @@ const card = (props: CardProps) => {
               })()}
             </svg>
           </div>
+
+          {numCards > 0 && (
+            <div
+              className={`absolute bottom-slide-3 right-slide-3 text-sm text-fmd-blue font-bold ${
+                isCapturing && "invisible"
+              }`}
+            >
+              {+i + 1} of {numCards}
+            </div>
+          )}
 
           <div className="absolute inset-0 p-slide-4 text-fmd-navy">
             {children}

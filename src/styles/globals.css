@@ -151,8 +151,8 @@ pre {
 		/* Transparent background */
 		@apply bg-stone-700 border-l-stone-700 border-t-stone-700;
 		position: relative;
-		top: -6px;
-		margin-left: 0.1rem;
+		top: calc(-0.3 * var(--code-font-size));
+		margin-left: calc(0.3 * var(--code-font-size));
 		/* Edges */
 		transform: translateY(25%) rotate(45deg);
 		/* Size */

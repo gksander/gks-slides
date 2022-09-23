@@ -43,7 +43,7 @@ module.exports = {
         fmd: {
           red: "#F04D21",
           navy: "#1E2852",
-          blue: "#EBE5DA",
+          blue: "#364C99",
           white: "#FFFFFF",
           yellow: "#FFC951",
           sky: "#8BDDFD",

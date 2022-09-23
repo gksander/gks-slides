@@ -14,6 +14,13 @@ and content
 1. one
 2. two
 
+
+```ts twoslash
+const x = 13;
+//    ^?
+```
+
+
 ---
 
 # Hello world!

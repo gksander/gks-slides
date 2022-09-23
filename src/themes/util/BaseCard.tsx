@@ -23,6 +23,7 @@ export const BaseCard = ({
   renderContents,
 }: CardProps & {
   renderContents: (args: {
+    isCapturing: boolean;
     isPrintingOrCapturing: boolean;
     i: number;
     numCards: number;
@@ -111,12 +112,6 @@ export const BaseCard = ({
           ref={slideRef}
           className="break-after-page transform-none text-gray-100 relative slide shadow-xl print:shadow-none text-base"
           style={{
-            // width: isCapturingSlide
-            //   ? `calc(${CAPTURE_SCALE} * ${width})`
-            //   : width,
-            // height: isCapturingSlide
-            //   ? `calc(${CAPTURE_SCALE} * ${height})`
-            //   : height,
             width,
             height,
             transform: !isPrintingOrCapturing
@@ -129,6 +124,7 @@ export const BaseCard = ({
           }}
         >
           {renderContents({
+            isCapturing: isCapturingSlide,
             isPrintingOrCapturing,
             i,
             numCards,
