@@ -143,17 +143,6 @@ pre {
 		color: #fee;
 	}
 
-	.arrow {
-		/*position: relative;
-		top: calc(-0.3 * var(--code-font-size));
-		margin-left: calc(0 * var(--code-font-size));
-		!* Edges *!
-		transform: translateY(25%) translateX(0%) rotate(0deg);
-		!* Size *!
-		height: calc(0.45 * var(--code-font-size));
-		width: calc(0.45 * var(--code-font-size));*/
-	}
-
 	.popover {
 		@apply py-slide-1 px-slide-2 relative;
 		margin-top: calc(0.35 * var(--code-font-size));

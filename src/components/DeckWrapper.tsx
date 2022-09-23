@@ -32,8 +32,18 @@ export const DeckWrapper = ({
     measure();
     window.addEventListener("resize", measure);
 
-    const onBeforePrint = () => setIsPrinting(true);
-    const onAfterPrint = () => setIsPrinting(false);
+    const style = document.createElement("style");
+    const onBeforePrint = () => {
+      document.head.appendChild(style);
+      style.sheet!.insertRule(
+        `@media print { @page { size: ${width} ${height}; }`
+      );
+      setIsPrinting(true);
+    };
+    const onAfterPrint = () => {
+      document.head.removeChild(style);
+      setIsPrinting(false);
+    };
 
     window.addEventListener("beforeprint", onBeforePrint);
     window.addEventListener("afterprint", onAfterPrint);
