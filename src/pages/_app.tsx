@@ -1,5 +1,7 @@
 import * as React from "react";
 import "../styles/globals.css";
+import "../themes/gks.css";
+import "../themes/formidable.css";
 import type { AppProps } from "next/app";
 
 function MyApp({ Component, pageProps }: AppProps) {

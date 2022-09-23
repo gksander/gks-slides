@@ -1,0 +1,49 @@
+.theme__formidable {
+	.code-block {
+		@apply bg-fmd-lightGray bg-opacity-70 border-fmd-lightGray;
+	}
+
+	pre {
+		@apply text-fmd-darkThunderCloud;
+
+		&.shiki {
+			/* highlight */
+			div.highlight { @apply bg-fmd-grayDarken10 bg-opacity-40; }
+		}
+
+		&.twoslash {
+			data-lsp:hover::before {
+				@apply text-gray-200;
+			}
+		}
+
+		.error {
+			@apply bg-fmd-grayDarken5 bg-opacity-80 text-fmd-darkThunderCloud;
+		}
+
+		.popover {
+			@apply bg-fmd-grayDarken5 text-fmd-darkThunderCloud;
+			&::before {
+				@apply border-b-fmd-grayDarken5;
+			}
+		}
+
+		.inline-completions {
+			ul.dropdown {
+				@apply bg-fmd-grayDarken5 border-fmd-blue;
+
+				&::before {
+					@apply bg-fmd-blue;
+				}
+
+				li {
+					span.result-found { @apply text-fmd-blue font-bold; }
+				}
+			}
+		}
+	}
+
+	.tag-container .twoslash-annotation {
+		@apply bg-fmd-grayDarken5;
+	}
+}

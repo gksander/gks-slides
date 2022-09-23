@@ -29,7 +29,7 @@ export default function Deck({
   theme = "gks",
   width = "8.5in",
   height = "8.5in",
-  fontSize = "0.2in",
+  fontSize = "0.24in",
   codeFontSize = fontSize,
 }: {
   code: string;
@@ -112,13 +112,17 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     source,
     mdxOptions(options, frontmatter) {
       yankedFrontmatter = frontmatter;
+      const shikiTheme = {
+        gks: "one-dark-pro",
+        formidable: "solarized-light",
+      }[(frontmatter?.theme as string) || "gks"];
 
       options.remarkPlugins = [
         stripFrontmatter,
         remarkDirective,
         directives,
         ...(options.remarkPlugins ?? []),
-        [shikiTwoSlash, { theme: "one-dark-pro" }],
+        [shikiTwoSlash, { theme: shikiTheme }],
         remarkMath,
         sectionize,
       ];

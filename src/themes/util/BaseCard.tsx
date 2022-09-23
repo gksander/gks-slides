@@ -13,6 +13,7 @@ export type CardProps = Props & {
 };
 
 export const BaseCard = ({
+  className,
   children,
   numCards,
   i,
@@ -70,9 +71,7 @@ export const BaseCard = ({
     setIsCapturingSlide(true);
     await wait(500);
 
-    const OUT_WIDTH = 2000;
-
-    console.log(cardWidth, cardHeight);
+    const OUT_WIDTH = 1000;
 
     const blob = await toBlob(slideRef.current, {
       canvasWidth: OUT_WIDTH,
@@ -99,7 +98,9 @@ export const BaseCard = ({
 
   return (
     <section
-      className="h-screen print:h-auto p-0 sm:p-2 md:p-4 print:p-0 snap-start"
+      className={`h-screen print:h-auto p-0 sm:p-2 md:p-4 print:p-0 snap-start ${className} ${
+        isCapturingSlide ? "is_capturing" : ""
+      }`}
       style={{
         // @ts-ignore
         "--slide-font-size": fontSize || "inherit",

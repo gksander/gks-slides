@@ -1,0 +1,53 @@
+.theme__gks {
+	.code-block {
+		@apply bg-stone-800 bg-opacity-70 border-stone-800;
+	}
+
+	pre {
+		@apply text-gray-200;
+
+		&.shiki {
+			/* highlight */
+			div.highlight { @apply bg-stone-600 bg-opacity-50; }
+		}
+
+		&.twoslash {
+			data-lsp:hover::before {
+				@apply text-gray-200;
+			}
+		}
+
+		.error {
+			@apply bg-stone-600 text-gray-100;
+		}
+
+		.arrow {
+			@apply bg-stone-700 border-l-stone-700 border-t-stone-700;
+		}
+
+		.popover {
+			@apply bg-stone-700 text-gray-200;
+			&::before {
+				@apply border-b-stone-700;
+			}
+		}
+
+		.inline-completions {
+			ul.dropdown {
+				@apply bg-stone-600 border-primary-600;
+
+				&::before {
+					@apply bg-primary-600;
+				}
+
+				li {
+					span.result-found { @apply text-primary-500; }
+				}
+			}
+		}
+	}
+
+	.tag-container .twoslash-annotation {
+		@apply bg-stone-700;
+	}
+}

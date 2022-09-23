@@ -2,24 +2,23 @@
 theme: formidable
 width: 8.5in
 height: 6in
+codeFontSize: 0.2in
 ---
 
 # Hello it's **Formidable**
 
-- one
-- two
-
-and content
-
-1. one
-2. two
-
+Here's some code.
 
 ```ts twoslash
 const x = 13;
 //    ^?
 ```
 
+And here's a formula woohoo
+
+$$
+f(x) = \sin\left(x^2\right)
+$$
 
 ---
 

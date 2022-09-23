@@ -6,6 +6,7 @@ const card = (props: CardProps) => {
   return (
     <BaseCard
       {...props}
+      className="theme__gks"
       renderContents={({ i, numCards, isPrintingOrCapturing, children }) => (
         <React.Fragment>
           <div className="absolute inset-0 bg-gradient-to-t from-stone-900 to-stone-800">

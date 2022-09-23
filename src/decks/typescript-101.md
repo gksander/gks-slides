@@ -1,3 +1,7 @@
+---
+theme: formidable
+---
+
 # TypeScript 101
 
 TODO: Banner here
