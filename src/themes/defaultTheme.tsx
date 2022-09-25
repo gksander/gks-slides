@@ -94,7 +94,7 @@ const pre = (props: Props) => {
 };
 
 const p = (props: Props) => (
-  <p {...props} className={`${props.className} mb-slide-4`} />
+  <p {...props} className={`${props.className} leading-relaxed mb-slide-4`} />
 );
 
 const FancyImg: NonNullable<DeckTheme["directives"]>["img"] = ({
@@ -146,6 +146,16 @@ const column: NonNullable<DeckTheme["directives"]>["column"] = ({
   />
 );
 
+const gap: NonNullable<DeckTheme["directives"]>["gap"] = ({ size = "md" }) => (
+  <div
+    className={clsx({
+      "h-slide-2": size === "sm",
+      "h-slide-4": size === "md",
+      "h-slide-8": size === "lg",
+    })}
+  />
+);
+
 export const defaultTheme: Omit<DeckTheme, "card"> = {
   nodes: {
     h1,
@@ -165,5 +175,6 @@ export const defaultTheme: Omit<DeckTheme, "card"> = {
     img: FancyImg,
     columns,
     column,
+    gap,
   },
 };

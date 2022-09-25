@@ -43,6 +43,7 @@ export type DeckTheme = {
         width?: string;
       }
     >;
+    gap?: GenericComponent<Props & { size?: "sm" | "md" | "lg" }>;
   };
 
   head?: React.ReactNode;
