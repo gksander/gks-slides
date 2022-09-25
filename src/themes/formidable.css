@@ -1,3 +1,8 @@
+
+code:not(pre code) {
+	@apply bg-gray-500 bg-opacity-20;
+}
+
 .theme__formidable {
 	.code-block {
 		@apply bg-fmd-lightGray bg-opacity-70 border-fmd-lightGray;
