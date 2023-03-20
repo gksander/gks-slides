@@ -130,7 +130,9 @@ pre {
 	}
 
 	.error {
-		@apply flex items-center gap-2 text-xs;
+		@apply flex items-center gap-2;
+		font-size: calc(0.9 * var(--code-font-size));
+		line-height: calc(1.2 * var(--code-font-size));
 		span:first-child {
 			@apply flex-1;
 		}

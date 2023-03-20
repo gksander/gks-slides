@@ -23,7 +23,7 @@ type Props = {
 };
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const mdFiles = (
-    await fs.readdir(path.resolve(process.cwd(), "pages"))
+    await fs.readdir(path.resolve(process.cwd(), "src/decks"))
   ).filter((name) => /(.*)\.mdx?$/.test(name));
 
   return {
